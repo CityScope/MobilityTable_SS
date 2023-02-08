@@ -277,10 +277,10 @@ experiment autonomousScenario type: gui {
 }
 
 experiment generalScenario type: gui {
-	int fontSize <- 5;
-	int x_val <- 2600;
+	int fontSize <- 14;
+	int x_val <- 180;
 	int x_step <- 300;
-	int y_val <- 5600;
+	int y_val <- 3100;
 	int y_step <- 150;
 	string batterySize <- "Small";
 	string chargeSpeed <- "Slow";
@@ -324,10 +324,10 @@ experiment generalScenario type: gui {
 				draw chargeSpeed at: {x_val+x_step, y_val+y_step*3} color: #black font: font("Helvetica", fontSize, #bold);
 				
 				draw "Num Vehicles" at: {x_val+x_step*2, y_val} color: #black font: font("Helvetica", fontSize, #bold);
-				draw ""+numAutonomousBikes at: {x_val+x_step*3.5, y_val+y_step/2} color: #black font: font("Helvetica", fontSize, #bold);
+				draw ""+numAutonomousBikes at: {x_val+x_step*2.9, y_val+y_step/2.1} color: #black font: font("Helvetica", fontSize, #bold);
 				
-				draw "Speed" at: {x_val+x_step*2, y_val+y_step*2} color: #black font: font("Helvetica", fontSize, #bold);
-				draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*3.5,y_val+y_step*2.5} color: #black font: font("Helvetica", fontSize, #bold);
+				draw "Speed" at: {x_val+x_step*2, y_val+y_step*1.83} color: #black font: font("Helvetica", fontSize, #bold);
+				draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*2.74,y_val+y_step*2.2} color: #black font: font("Helvetica", fontSize, #bold);
 				
 			}
 			//draw "UnservedTrips: " + unservedCount at: {0, 7000} color: #white font: font("Helvetica", 40, #plain);
