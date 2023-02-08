@@ -1185,3 +1185,52 @@ species car control: fsm skills: [moving] {
 		}
 	}
 }
+
+species NetworkingAgent skills:[network] {
+	
+	reflex fetch when:has_more_message() {	
+		
+		loop while:has_more_message(){
+			message mes <- fetch_message();	
+			
+ 			list m <- string(mes.contents) split_with('[, ]');
+ 			
+ 			int source <- m[0];
+ 			int value <- m[1];
+ 			
+ 			if source = 0 {
+ 				PickUpSpeedAutonomousBike <- (20-value)/3.6;
+ 			} else if source = 1 {
+ 				numAutonomousBikes <- 300-value*10;
+ 			} else if source = 3 {
+ 				if value = 1 {
+ 					traditionalScenario <- true;
+ 				} else if value = 0 {
+ 					traditionalScenario <- false;
+ 				}
+ 			} else if source = 2 {
+ 				if value = 1 {
+ 					carType <- "Combustion";
+ 				} else if value = 0 {
+ 					carType <- "Electric";
+ 				}
+ 			} else if source = 4 {
+ 				if value = 1 {
+ 					rechargeRate <- "4.5hours";
+ 				} else if value = 0 {
+ 					rechargeRate <- "111s";
+ 				}
+ 			} else if source = 5 {
+ 				if value = 1 {
+ 					maxBatteryLifeAutonomousBike <- 35000.0 ;
+ 				} else if value = 0 {
+ 					maxBatteryLifeAutonomousBike <- 65000.0 ;
+ 				}
+ 			}
+ 			
+ 			write("change");
+ 			write(source);
+ 			write(value);
+		}
+	}
+}

@@ -36,14 +36,14 @@ void setup() {
 void loop() {
     
     Serial.print("0:");
-    Serial.print(int(analogRead(PIN_SLIDE_A)/10));
+    Serial.print(int(analogRead(PIN_SLIDE_A)*5.0/1024*3));
     Serial.println(" ");
-    delay(200);
+    delay(500);
 
     Serial.print("1:");
-    Serial.print(int(analogRead(PIN_SLIDE_B)/10));
+    Serial.print(int(analogRead(PIN_SLIDE_B)*5.0/1024*5));
     Serial.println("  ");
-    delay(200);
+    delay(500);
 
     A = AA;
     AA = digitalRead(BUTTON_A);

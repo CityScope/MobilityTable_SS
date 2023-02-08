@@ -9,7 +9,7 @@ global {
 	float step <- 10 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 00:00:00"); 
+	date starting_date <- date("2022-10-11 06:00:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
@@ -94,8 +94,9 @@ global {
 	string usage <- "usage";
 	
 	map<string, rgb> color_map <- [residence::#papayawhip-10, office::#gray, park::#lightgreen, education::#lightblue, "Other"::#black];
-    map<string, rgb> color_map_2 <-  [residence::#lightslategray, office::#aqua, park::#limegreen, education::#steelblue, "Other"::#black];
-    
+    //map<string, rgb> color_map_2 <-  [residence::#lightslategray, office::#aqua, park::#limegreen, education::#steelblue, "Other"::#black];
+    map<string, rgb> color_map_2 <-  [residence::#lightgray, office::#lightgray, park::#lightgray, education::#lightgray, "Other"::#lightgray];
+
 	//GIS FILES To Upload - Cambridge
 	string cityGISFolder <- "./../includes/City/"+cityScopeCity;
 	file bound_shapefile <- file(cityGISFolder + "/Bounds.shp")			parameter: "Bounds Shapefile:" category: "GIS";
@@ -114,7 +115,7 @@ global {
 	//Image File
 	file imageRaster <- file('./../images/gama_black.png');
 	
-	bool show_building <- true;
+	bool show_building <- false;
 	bool show_road <- true;
 	bool show_restaurant <- true;
 	bool show_gasStation <- true;
