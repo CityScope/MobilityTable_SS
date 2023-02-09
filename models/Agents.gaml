@@ -214,7 +214,7 @@ global {
 	
 species road {
 	aspect base {
-		draw shape color: #black;
+		draw shape color: #gray width: 2.0;
 	}
 }
 
@@ -297,10 +297,10 @@ species package control: fsm skills: [moving] {
     	
     	"requestingDeliveryMode"::#red,
     	
-		"awaiting_autonomousBike":: #yellow,
+		"awaiting_autonomousBike":: #lightgreen,
 		"awaiting_car":: #cyan,
 		
-		"delivering_autonomousBike":: #yellow,
+		"delivering_autonomousBike":: #lightgreen,
 		"delivering_car"::#cyan,
 		
 		"lastmile"::#lightsteelblue,
@@ -535,13 +535,13 @@ species autonomousBike control: fsm skills: [moving] {
 		"getting_night_charge":: #red,
 		"night_relocating":: #springgreen,
 		
-		"picking_up_packages"::#gold,
-		"in_use_packages"::#gold
+		"picking_up_packages"::#lime,
+		"in_use_packages"::#lime
 	];
 	
 	aspect realistic {
 		color <- color_map[state];
-		draw triangle(50) color:color border:color rotate: heading + 90 ;
+		draw triangle(60) color:color border:color rotate: heading + 90 ;
 	} 
 
 	autonomousBikeLogger_roadsTraveled travelLogger;
@@ -928,7 +928,7 @@ species car control: fsm skills: [moving] {
 	
 	aspect realistic {
 		color <- color_map[state];
-		draw triangle(50) color:color border:color rotate: heading + 90 ;
+		draw triangle(60) color:color border:color rotate: heading + 90 ;
 	} 
 
 	carLogger_roadsTraveled travelLogger;

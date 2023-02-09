@@ -9,7 +9,7 @@ global {
 	float step <- 10 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 06:00:00"); 
+	date starting_date <- date("2022-10-11 00:00:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
@@ -39,6 +39,7 @@ global {
 	//----------------------------------Scenarios-----------------------------
 	bool traditionalScenario <- false parameter: "Traditional Scenario" category: "Scenarios";
 	int numVehiclesPackageTraditional <- 35 ;
+	bool timetoreload <- false;
 	
 	//----------------------Autonomous Scenario-------------------------
 	//-----------------Autonomous Bike Parameters-----------------------

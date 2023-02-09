@@ -187,103 +187,13 @@ global {
 		initial_scenario <- traditionalScenario;
 		unservedCount <- 0;
 	}
-}
-
-experiment traditionalScenario {
-	parameter var: numVehiclesPackageTraditional init: numVehiclesPackageTraditional;
-//	float minimum_cycle_duration<- 1 #sec;-
-	output {
-		display Traditional_Scenario type:opengl background: #black axes: false{	
-			species building aspect: type visible:show_building position:{0,0,-0.001};
-			species road aspect: base visible:show_road;
-			species restaurant aspect:base visible:show_restaurant position:{0,0,-0.001};
-			species gasstation aspect:base visible:show_gasStation;
-			species chargingStation aspect: base visible:show_chargingStation ;
-			species car aspect: realistic visible:show_car trace:15 fading: true; 
-			species autonomousBike aspect: realistic visible:show_autonomousBike trace:30 fading: true;
-			species package aspect:base visible:show_package;
-			
-		event["b"] {show_building<-!show_building;}
-		event["r"] {show_road<-!show_road;}
-		event["s"] {show_gasStation<-!show_gasStation;}
-		event["f"] {show_restaurant<-!show_restaurant;}
-		event["d"] {show_package<-!show_package;}
-		event["c"] {show_car<-!show_car;}
-		}
+	
+	/*reflex stop_simulation when: cycle >= numberOfDays * numberOfHours * 3600 / step {
+		timetoreload <- true;
+		do pause;
 		
-		/* series graph for car variables */
-		display vehicleTasks antialias: true{
-    		chart "Vehicle Tasks" type: series background: #black color: #white axes: #white tick_line_color:#white x_label: "Time (sec)" y_label: "Number of Vehicles"{
-    			data "wandering" value: wanderCountCar color: #blue marker: false style: line;
-    			data "low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
-    			data "getting charge/fuel" value: getFuelCount color: #red marker: false style: line;
-//    			data "pick up" value: pickUpCount color: #yellow marker: false style: line;
-    			data "in use" value: inUseCountCar+pickUpCountCar color: #green marker: false style: line;
-    			//data "night relocating" value: nightRelCount color: #purple marker: false style: line;
-   			}
-    	}
-    	
-    	/* series graph for last 10 (moving) average wait time */
-  		display avgWaitTime antialias: true{
-			chart "Average Wait Time" type: series background: #black color: #white axes: #white tick_line_color:#white x_label: "Time (sec)" y_label: "Average Last 10 Wait Times (min)"{
-				data "Wait Time" value: avgWait color: #pink marker: false style: line;
-			}
-		}
-	}
-}
-
-experiment autonomousScenario type: gui {
-	parameter var: numAutonomousBikes init: numAutonomousBikes;
-	float minimum_cycle_duration<- 1 #sec;
-    output {
-		display autonomousScenario type:opengl background: #black axes: false{	 
-			species building aspect: type visible:show_building position:{0,0,-0.001};
-			species road aspect: base visible:show_road ;
-			species gasstation aspect:base visible:show_gasStation;
-			species chargingStation aspect: base visible:show_chargingStation ;
-			species restaurant aspect:base visible:show_restaurant position:{0,0,-0.001};
-			species autonomousBike aspect: realistic visible:show_autonomousBike trace:30 fading: true;
-			species car aspect: realistic visible:show_car trace:15 fading: true; 
-			species package aspect:base visible:show_package;
-			//species intersection aspect:base;
-		event["b"] {show_building<-!show_building;}
-		event["r"] {show_road<-!show_road;}
-		event["s"] {show_chargingStation<-!show_chargingStation;}
-		event["f"] {show_restaurant<-!show_restaurant;}
-		event["d"] {show_package<-!show_package;}
-		event["a"] {show_autonomousBike<-!show_autonomousBike;}
-		}
-		/* series graph for bike variables */
-		display vehicleTasks antialias: true{
-    		chart "Vehicle Tasks" type: series background: #black color: #white axes: #white tick_line_color:#white x_label: "Time (sec)" y_label: "Number of Vehicles"{
-    			data "wandering" value: wanderCount color: #blue marker: false style: line;
-    			data "low battery" value: lowBattCount color: #orange marker: false style: line;
-    			data "getting charge" value: getChargeCount color: #red marker: false style: line;
-//    			data "pick up" value: pickUpCount color: #yellow marker: false style: line;
-    			data "in use" value: inUseCount+pickUpCount color: #green marker: false style: line;
-    			data "night relocating" value: nightRelCount color: #purple marker: false style: line;
-   			}
-    	}
-    	
-    	//inactive pie chart
-    	/* 
-		display percentServed {
-			chart "Delivery Speed" type: pie{
-			loop while: length(timeList) < 10{
-				datalist["Served in less than 40min", "Served in more than 40min"] value: [] color: [];
-			}
-			datalist["Served in less than 40min", "Served in more than 40min"] value: [10-moreThanWait, moreThanWait] color: [#blue, #red];
-			}
-		} */
-
-    	/* series graph for last 10 (moving) average wait time */
-		display avgWaitTime antialias: true{
-			chart "Average Wait Time" type: series background: #black color: #white axes: #white tick_line_color:#white x_label: "Time (sec)" y_label: "Average Last 10 Wait Times (min)"{
-				data "Wait Time" value: avgWait color: #pink marker: false style: line; 
-			}
-		}
-    }
-		
+	}*/
+	
 }
 
 experiment generalScenario type: gui {
@@ -294,59 +204,42 @@ experiment generalScenario type: gui {
 	int y_step <- 150;
 	string batterySize <- "Small";
 	string chargeSpeed <- "Slow";
-    output {
-    layout #split  parameters: true navigator: false editors: false consoles: false toolbars: false tray: false tabs: true;
-		display autonomousScenario type:opengl background: #white axes: false {	 
-			species building aspect: type visible:show_building ;
-			species road aspect: base visible:show_road ;
-			species gasstation aspect:base visible:show_gasStation;
-			species chargingStation aspect: base visible:show_chargingStation ;
-			species restaurant aspect:base visible:show_restaurant;
-			species autonomousBike aspect: realistic visible:show_autonomousBike trace:30 fading: true;
-			species car aspect: realistic visible:show_car trace:15 fading: true; 
-			species package aspect:base visible:show_package;
-			//species intersection aspect:base;
-		event["b"] {show_building<-!show_building;}
-		event["r"] {show_road<-!show_road;}
-		event["s"] {show_chargingStation<-!show_chargingStation;}
-		event["f"] {show_restaurant<-!show_restaurant;}
-		event["d"] {show_package<-!show_package;}
-		event["a"] {show_autonomousBike<-!show_autonomousBike;}
-		event["c"] {show_car<-!show_car;}
 
-		graphics Strings {
-			if maxBatteryLifeAutonomousBike = 65000.0{
-				batterySize <- "Large";
-			} if rechargeRate = "111s"{
-				chargeSpeed <- "Fast";
+    output {
+	    layout  horizontal ([ vertical ([0::5000,1::5000,2::2500])::2500, vertical ([3::5000 ,4::5000]) ::5000]) background: #black consoles: false controls: false editors: false navigator: false tabs: false parameters: false toolbars: false tray: false ;
+		
+		display reductionICE antialias: false type: java2D refresh_every:1 { 
+			chart "Reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false{
+				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
+				data " " value: 100-round(reductionICE*100)/100 color: #darkgray;
 			}
-			draw "Scenario" at: {x_val, y_val} color: #black font: font("Helvetica", fontSize, #bold);
-			if traditionalScenario{
-				draw "Current" at: {x_val, y_val+y_step} color: #black font: font("Helvetica", fontSize, #bold);
-				draw carType at: {x_val+x_step, y_val+y_step} color: #black font: font("Helvetica", fontSize, #bold);
-			} else{
-				draw "Future" at: {x_val, y_val+y_step} color: #black font: font("Helvetica", fontSize, #bold);
-				
-				draw "Battery" at: {x_val, y_val+y_step*2} color: #black font: font("Helvetica", fontSize, #bold);
-				draw batterySize at: {x_val, y_val+y_step*3} color: #black font: font("Helvetica", fontSize, #bold);
-				
-				draw "Charge" at: {x_val+x_step, y_val+y_step*2} color: #black font: font("Helvetica", fontSize, #bold);
-				draw chargeSpeed at: {x_val+x_step, y_val+y_step*3} color: #black font: font("Helvetica", fontSize, #bold);
-				
-				draw "Num Vehicles" at: {x_val+x_step*2, y_val} color: #black font: font("Helvetica", fontSize, #bold);
-				draw ""+numAutonomousBikes at: {x_val+x_step*2.9, y_val+y_step/2.1} color: #black font: font("Helvetica", fontSize, #bold);
-				
-				draw "Speed" at: {x_val+x_step*2, y_val+y_step*1.83} color: #black font: font("Helvetica", fontSize, #bold);
-				draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*2.74,y_val+y_step*2.2} color: #black font: font("Helvetica", fontSize, #bold);
-				
+			graphics Strings {
+				draw " " + round(reductionICE*100)/100 + "%" at: {1500, 3200} color: #white font: font("Helvetica", 40, #bold);
 			}
-			//draw "UnservedTrips: " + unservedCount at: {0, 7000} color: #white font: font("Helvetica", 40, #plain);
+		}
+				
+		display reductionBEV  antialias: false type: java2D refresh_every:1{
+			chart "Reduction vs. Electric Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false{ 
+				data "reduction %" value: round(reductionBEV*100)/100 color: #darkgreen;
+				data " " value: 100-round(reductionBEV*100)/100 color: #darkgray;
+			}
+			graphics Strings{
+				draw " " + round(reductionBEV*100)/100 + "%" at: {1500, 3200} color: #white font: font("Helvetica", 40, #bold);
+			}
+		}
+		
+		display CO2 antialias: false axes: false refresh_every:1{
+			chart "CO2" type:histogram reverse_axes: true background: #black color: #white axes: #transparent title_font: font("Helvetica", 20, #bold) tick_line_color:#transparent y_range: [0.0, 60.0] x_serie_labels: "gCO2/km:" x_label: string(round(gramsCO2*100)/100) series_label_position: xaxis memorize:false{
+				data " "
+					style: bar
+					value: round(gramsCO2*100)/100
+					color: #red;
 			}
 		}
 		
 		/* series graph for bike and car variables */
-		display vehicleTasks antialias: false axes: false {
-    		chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 362 {
+		display vehicleTasks antialias: false axes: false refresh_every:1{
+    		chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 362 memorize:false{
     			
     			data "wandering cars" value: wanderCountCar color: #blue marker: false style: line;
 				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
@@ -363,87 +256,113 @@ experiment generalScenario type: gui {
 		
     	/* series graph for last 10 (moving) average wait time */
 		
-		display avgWaitTime antialias: false axes: false{
-			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour))  x_tick_unit: 362 {
+		display avgWaitTime antialias: false axes: false refresh_every:1{
+			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour)) x_tick_unit: 362  memorize:false{
 				data "Wait Time" value: avgWait color: #pink marker: false style: line;
-				data "40min" value: 40 color: #red marker: false style: line;
+				data "40 min" value: 40 color: #red marker: false style: line;
 			}
 		}
-		
-		display CO2 antialias: false axes: false {
-			chart "CO2" type:histogram reverse_axes: true background: #black color: #white axes: #transparent title_font: font("Helvetica", 20, #bold) tick_line_color:#transparent y_range: [0.0, 60.0] x_serie_labels: "gCO2/km:" x_label: string(round(gramsCO2*100)/100)
-			series_label_position: xaxis
-			{
-				data " "
-					style: bar
-					value: round(gramsCO2*100)/100
-					color: #red;
-			}
-		}/*
-		display "Strings" type: opengl  axes: false background: #white{
 			
+		
+		display autonomousScenario type:opengl background: #black axes: false refresh_every:1{	 
+			// species building aspect: type visible:show_building ;
+			species road aspect: base visible:show_road;
+			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
+			species chargingStation aspect: base visible:(!traditionalScenario and show_chargingStation);
+			species restaurant aspect:base visible:show_restaurant;
+			species autonomousBike aspect: realistic visible:show_autonomousBike trace:15 fading: true;
+			species car aspect: realistic visible:show_car trace:15 fading: true; 
+			species package aspect:base visible:show_package;
+				
+			event["b"] {show_building<-!show_building;}
+			event["r"] {show_road<-!show_road;}
+			event["s"] {show_chargingStation<-!show_chargingStation;}
+			event["s"] {show_gasStation<-!show_gasStation;}
+			event["f"] {show_restaurant<-!show_restaurant;}
+			event["d"] {show_package<-!show_package;}
+			event["a"] {show_autonomousBike<-!show_autonomousBike;}
+			event["c"] {show_car<-!show_car;}
+	
 			graphics Strings {
-				if maxBatteryLifeAutonomousBike = 65000{
+				if maxBatteryLifeAutonomousBike = 65000.0{
 					batterySize <- "Large";
 				} if rechargeRate = "111s"{
 					chargeSpeed <- "Fast";
 				}
-				draw "Scenario" at: {x_val, y_val} color: #black font: font("Helvetica", 12, #bold);
+				draw "Scenario" at: {x_val, y_val} color: #white font: font("Helvetica", fontSize, #bold);
 				if traditionalScenario{
-					draw "Current" at: {x_val, y_val+y_step} color: #black font: font("Helvetica", 12, #bold);
-					draw carType at: {x_val+x_step, y_val+y_step} color: #black font: font("Helvetica", 12, #bold);
+					draw "Current" at: {x_val, y_val+y_step} color: #white font: font("Helvetica", fontSize, #bold);
+					draw carType at: {x_val+x_step, y_val+y_step} color: #white font: font("Helvetica", fontSize, #bold);
 				} else{
-					draw "Future" at: {x_val, y_val+y_step} color: #black font: font("Helvetica", 12, #bold);
+					draw "Future" at: {x_val, y_val+y_step} color: #white font: font("Helvetica", fontSize, #bold);
 					
-					draw "Battery" at: {x_val, y_val+y_step*1.5} color: #black font: font("Helvetica", 12, #bold);
-					draw batterySize at: {x_val, y_val+y_step*2.5} color: #black font: font("Helvetica", 12, #bold);
+					draw "Battery" at: {x_val, y_val+y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
+					draw batterySize at: {x_val, y_val+y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
 					
-					draw "Charge" at: {x_val+x_step, y_val+y_step*1.5} color: #black font: font("Helvetica", 12, #bold);
-					draw chargeSpeed at: {x_val+x_step, y_val+y_step*2.5} color: #black font: font("Helvetica", 12, #bold);
+					draw "Charge" at: {x_val+x_step, y_val+y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
+					draw chargeSpeed at: {x_val+x_step, y_val+y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
 					
-					draw "Num Vehicles" at: {x_val+x_step*2, y_val} color: #black font: font("Helvetica", 12, #bold);
-					draw ""+numAutonomousBikes at: {x_val+x_step*3, y_val+y_step/2} color: #black font: font("Helvetica", 12, #bold);
+					draw "Num Vehicles" at: {x_val+x_step*2, y_val} color: #white font: font("Helvetica", fontSize, #bold);
+					draw ""+numAutonomousBikes at: {x_val+x_step*2.9, y_val+y_step/2.1} color: #white font: font("Helvetica", fontSize, #bold);
 					
-					draw "Speed" at: {x_val+x_step*2, y_val+y_step*1.5} color: #black font: font("Helvetica", 12, #bold);
-					draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*3,y_val+y_step*2} color: #black font: font("Helvetica", 12, #bold);
+					draw "Speed" at: {x_val+x_step*2, y_val+y_step*1.83} color: #white font: font("Helvetica", fontSize, #bold);
+					draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*2.74,y_val+y_step*2.2} color: #white font: font("Helvetica", fontSize, #bold);
 					
 				}
 				//draw "UnservedTrips: " + unservedCount at: {0, 7000} color: #white font: font("Helvetica", 40, #plain);
 				}
-			} */
-			
-		display reductionICE antialias: false type: java2D{ 
-			chart "Reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none{
-				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
-				data " " value: 100-round(reductionICE*100)/100 color: #darkgray;
-				}
-			graphics Strings{
-				draw " " + round(reductionICE*100)/100 + "%" at: {2400, 3200} color: #white font: font("Helvetica", 40, #bold);
-				}
 			}
 			
-		display reductionBEV  antialias: false type: java2D{
-			chart "Reduction vs. Electric Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none{ 
-				data "reduction %" value: round(reductionBEV*100)/100 color: #darkgreen;
-				data " " value: 100-round(reductionBEV*100)/100 color: #darkgray;
-				}
-			graphics Strings{
-				draw " " + round(reductionBEV*100)/100 + "%" at: {2400, 3200} color: #white font: font("Helvetica", 40, #bold);
-				}
-			}
-		
-		
-//		display unservedTrips antialias: true draw_env: false{
-//    		chart "Unserved Trips" type: histogram background: #black color: #white axes: #white tick_line_color:#transparent y_label: "Number of Unserved Trips [-]"{
-//				data "Unserved Trips" value: unservedCount;
-//			}
-//    	}
+			
+			
+			
+			/*
+			display "Strings" type: opengl  axes: false background: #white{
+				
+				graphics Strings {
+					if maxBatteryLifeAutonomousBike = 65000{
+						batterySize <- "Large";
+					} if rechargeRate = "111s"{
+						chargeSpeed <- "Fast";
+					}
+					draw "Scenario" at: {x_val, y_val} color: #black font: font("Helvetica", 12, #bold);
+					if traditionalScenario{
+						draw "Current" at: {x_val, y_val+y_step} color: #black font: font("Helvetica", 12, #bold);
+						draw carType at: {x_val+x_step, y_val+y_step} color: #black font: font("Helvetica", 12, #bold);
+					} else{
+						draw "Future" at: {x_val, y_val+y_step} color: #black font: font("Helvetica", 12, #bold);
+						
+						draw "Battery" at: {x_val, y_val+y_step*1.5} color: #black font: font("Helvetica", 12, #bold);
+						draw batterySize at: {x_val, y_val+y_step*2.5} color: #black font: font("Helvetica", 12, #bold);
+						
+						draw "Charge" at: {x_val+x_step, y_val+y_step*1.5} color: #black font: font("Helvetica", 12, #bold);
+						draw chargeSpeed at: {x_val+x_step, y_val+y_step*2.5} color: #black font: font("Helvetica", 12, #bold);
+						
+						draw "Num Vehicles" at: {x_val+x_step*2, y_val} color: #black font: font("Helvetica", 12, #bold);
+						draw ""+numAutonomousBikes at: {x_val+x_step*3, y_val+y_step/2} color: #black font: font("Helvetica", 12, #bold);
+						
+						draw "Speed" at: {x_val+x_step*2, y_val+y_step*1.5} color: #black font: font("Helvetica", 12, #bold);
+						draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*3,y_val+y_step*2} color: #black font: font("Helvetica", 12, #bold);
+						
+					}
+					//draw "UnservedTrips: " + unservedCount at: {0, 7000} color: #white font: font("Helvetica", 40, #plain);
+					}
+				} */
+				
+			
+			
+			
+	//		display unservedTrips antialias: true draw_env: false{
+	//    		chart "Unserved Trips" type: histogram background: #black color: #white axes: #white tick_line_color:#transparent y_label: "Number of Unserved Trips [-]"{
+	//				data "Unserved Trips" value: unservedCount;
+	//			}
+	//    	}
     	
     }
 		
 }
 
-experiment car_batch_experiment type: batch repeat: 1 until: (cycle >= numberOfDays * numberOfHours * 3600 / step) {
+/*experiment car_batch_experiment type: batch repeat: 1 until: (cycle >= numberOfDays * numberOfHours * 3600 / step) {
 	parameter var: numVehiclesPackageTraditional among: [5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80];
 }
 
@@ -454,4 +373,4 @@ experiment autonomousbike_batch_experiment type: batch repeat: 1 until: (cycle >
 	parameter var: PickUpSpeedAutonomousBike among: [5/3.6,20/3.6];
 	//parameter var: maxBatteryLifeAutonomousBike among: [50000.0];
 	parameter var: maxBatteryLifeAutonomousBike among: [35000.0,65000.0];
-}
+}*/
