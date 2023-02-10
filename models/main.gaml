@@ -204,9 +204,11 @@ experiment generalScenario type: gui {
 	int y_step <- 150;
 	string batterySize <- "Small";
 	string chargeSpeed <- "Slow";
+	
+	float minimum_cycle_duration <- 0.050 #s;
 
     output {
-	    layout  horizontal ([ vertical ([0::5000,1::5000,2::2500])::2500, vertical ([3::5000 ,4::5000]) ::5000]) background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false;// tabs: false;
+	    layout  horizontal ([ vertical ([0::5000,1::5000,2::2500])::2500, vertical ([3::5000 ,4::5000]) ::5000]) background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: false;
 		
 		display reductionICE antialias: false type: java2D { 
 			chart "Reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false{
@@ -239,7 +241,7 @@ experiment generalScenario type: gui {
 		
 		/* series graph for bike and car variables */
 		display vehicleTasks antialias: false axes: false {
-    		chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 362 memorize:false{
+    		chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 1810 memorize:false{
     			
     			data "wandering cars" value: wanderCountCar color: #blue marker: false style: line;
 				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
@@ -257,7 +259,7 @@ experiment generalScenario type: gui {
     	/* series graph for last 10 (moving) average wait time */
 		
 		display avgWaitTime antialias: false axes: false {
-			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour)) x_tick_unit: 362  memorize:false{
+			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour)) x_tick_unit: 1810  memorize:false{
 				data "Wait Time" value: avgWait color: #pink marker: false style: line;
 				data "40 min" value: 40 color: #red marker: false style: line;
 			}
