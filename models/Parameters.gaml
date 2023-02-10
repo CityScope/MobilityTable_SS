@@ -59,6 +59,8 @@ global {
 	bool nightRechargeCond <- false;// parameter: "Night Recharge Condition" category: "Autonomous Bicycle";
 	bool rechargeCond <- false;// parameter: "Battery Condition" category: "Autonomous Bicycle";
 	
+	string chargeSpeed <- "Slow" among: ["Slow", "Fast"];
+	string batterySize <- "Large" among: ["Small", "Large"];
 	//----------------------Traditional Scenario-------------------------
 	//------------------------Car Parameters------------------------------
 	// Data extracted from: https://www.thecoldwire.com/how-many-miles-does-a-full-tank-of-gas-last/

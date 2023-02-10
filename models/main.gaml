@@ -172,6 +172,8 @@ global {
 			location <- point(one_of(road));
 			fuel <- rnd(minSafeFuelCar,maxFuelCar); 
 			fleetsizeCountCar <- fleetsizeCountCar +1;
+			
+			
 		}
 	}
 	
@@ -202,23 +204,21 @@ experiment generalScenario type: gui {
 	int x_step <- 300;
 	int y_val <- 3000;
 	int y_step <- 150;
-	string batterySize <- "Small";
-	string chargeSpeed <- "Slow";
 	
-	float minimum_cycle_duration <- 0.050 #s;
+	float minimum_cycle_duration <- 0.030 #s;
 
     output {
 	    layout  /*horizontal ([ vertical ([0::5000,1::5000,2::2500])::2500, vertical ([3::5000 ,4::5000]) ::5000])*/ background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
 		display reductionICE antialias: false type: java2D background: #black{ 
-			chart "Reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false position: {0,0} size:{1000,1300}{
+			chart "CO2 reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false position: {0,0} size:{1000,1300}{
 				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
 				data " " value: 100-round(reductionICE*100)/100 color: #darkgray;
 			}
 			graphics Strings {
 				draw " " + round(reductionICE*100)/100 + "%" at: {230, 780} color: #white font: font("Helvetica", 30, #bold);
 			}
-			chart "Reduction vs. Electric Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false position: {0,1300} size:{1000,1300}{ 
+			chart "CO2 reduction vs. Electric Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false position: {0,1300} size:{1000,1300}{ 
 				data "reduction %" value: round(reductionBEV*100)/100 color: #darkgreen;
 				data " " value: 100-round(reductionBEV*100)/100 color: #darkgray;
 			}
@@ -233,15 +233,15 @@ experiment generalScenario type: gui {
 			}
 			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 1810 memorize:false position: {1000,0} size:{2800,1300}{
     			
-    			data "wandering cars" value: wanderCountCar color: #blue marker: false style: line;
+    			data "Idling vehicles" value: wanderCountCar color: #dimgray marker: false style: line;
 				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
-				data "car getting charge/fuel" value: getFuelCount color: #red marker: false style: line;
-				data "cars in use" value: inUseCountCar+pickUpCountCar color: #yellow marker: false style: line;
+				data "Recharging/Refuelling" value: getFuelCount color: #red marker: false style: line ;
+				data "Cars in use" value: inUseCountCar+pickUpCountCar color: #cyan marker: false style: line;
 				
-				data "wandering bikes" value: wanderCount color: #lightblue marker: false style: line;	
+				data "Idling vehicles" value: wanderCount color: #dimgray marker: false style: line;	
 				//data "bikes with low battery" value: lowBattCount color: #coral marker: false style: line;
-				data "bikes getting charge" value: getChargeCount color: #red marker: false style: line;
-				data "bikes in use" value: inUseCount+pickUpCount color: #lightgreen marker: false style: line;
+				data "Recharging" value: getChargeCount color: #red marker: false style: line;
+				data "Autonomous micro-mobility in use" value: inUseCount+pickUpCount color: #lime marker: false style: line;
 				//data "bikes night relocating" value: nightRelCount color: #plum marker: false style: line;
    			}
    			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour)) x_tick_unit: 1810  memorize:false position: {1000,1300} size:{2800,1300}{
@@ -303,7 +303,7 @@ experiment generalScenario type: gui {
 			species chargingStation aspect: base visible:(!traditionalScenario and show_chargingStation);
 			species restaurant aspect:base visible:show_restaurant;
 			species autonomousBike aspect: realistic visible:show_autonomousBike trace:15 fading: true;
-			species car aspect: realistic visible:show_car trace:15 fading: true; 
+			species car aspect: realistic visible:show_car trace:3 fading: true; 
 			species package aspect:base visible:show_package;
 				
 			event["b"] {show_building<-!show_building;}
@@ -324,18 +324,18 @@ experiment generalScenario type: gui {
 				draw triangle(40) at: {x_val+x_step*4, y_val + y_step - 20} color: #cyan;
 				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*3 - 20} color: #red;
 				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*2 - 20} color: #lime;
-				draw circle(20)at: {x_val+x_step*7, y_val + y_step - 20} color: #yellow;
-				draw circle(20)at: {x_val+x_step*7, y_val + y_step*2 - 20} color: #hotpink;
-				draw " = Restaurants" at: {x_val+x_step*7 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
+				draw circle(20)at: {x_val+x_step*8, y_val + y_step - 20} color: #yellow;
+				draw circle(20)at: {x_val+x_step*8, y_val + y_step*2 - 20} color: #hotpink;
+				draw " = Restaurants" at: {x_val+x_step*8 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
 				if traditionalScenario{
-					draw " = Gas Stations" at: {x_val+x_step*7 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
+					draw " = Gas Stations" at: {x_val+x_step*8 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
 				} else{
-					draw " = Charge Stations" at: {x_val+x_step*7 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);				
+					draw " = Charge Stations" at: {x_val+x_step*8 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);				
 				}
 				draw " = Cars in use" at: {x_val+x_step*4 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
 				draw " = Charging Vehicles" at: {x_val+x_step*4 + 50, y_val + y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
 				draw " = Autonomous micro-mobility in use" at: {x_val+x_step*4 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
-				draw ""+current_date at: {x_val+x_step*8.5, y_val+y_step*2} color: #white font: font("Helvetica", fontSize*2, #bold);
+				draw ""+current_date at: {x_val+x_step*8, y_val+y_step*3} color: #white font: font("Helvetica", fontSize*1.5, #bold);
 				draw "SCENARIO" at: {x_val, y_val-10} color: #white font: font("Helvetica", fontSize, #bold);
 				if traditionalScenario{
 					draw "Current" at: {x_val+15, y_val+y_step+10} color: #white font: font("Helvetica", fontSize);

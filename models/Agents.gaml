@@ -214,7 +214,7 @@ global {
 	
 species road {
 	aspect base {
-		draw shape color: #gray width: 2.0;
+		draw shape color: #gray width: 3.0;
 	}
 }
 
@@ -229,14 +229,14 @@ species chargingStation{
 	
 	list<autonomousBike> autonomousBikesToCharge;
 	
-	rgb color <- #deeppink;
+	rgb color <- #purple;
 	
 	float lat;
 	float lon;
 	int capacity;
 	
 	aspect base{
-		draw hexagon(25,25) color:color border:#black;
+		draw circle(10) color:color border:#purple;
 	}
 	
 	reflex chargeBikes {
@@ -255,13 +255,13 @@ species restaurant{
 	point rest;
 	
 	aspect base{
-		draw circle(10) color:color;
+		draw square(30) color:color;
 	}
 }
 
 species gasstation{
 	
-	rgb color <- #hotpink;
+	rgb color <- #purple;
 	
 	list<car> carsToRefill;
 	float lat;
@@ -269,7 +269,7 @@ species gasstation{
 	int capacity;
 	
 	aspect base{
-		draw circle(30) color:color border:#black;
+		draw circle(10) color:color border:#purple;
 	}
 	reflex refillCars {
 		ask gasStationCapacity first carsToRefill {
@@ -297,10 +297,10 @@ species package control: fsm skills: [moving] {
     	
     	"requestingDeliveryMode"::#red,
     	
-		"awaiting_autonomousBike":: #lightgreen,
+		"awaiting_autonomousBike":: #lime,
 		"awaiting_car":: #cyan,
 		
-		"delivering_autonomousBike":: #lightgreen,
+		"delivering_autonomousBike":: #lime,
 		"delivering_car"::#cyan,
 		
 		"lastmile"::#lightsteelblue,
@@ -527,7 +527,7 @@ species autonomousBike control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
-		"wandering"::#transparent,
+		"wandering"::#dimgray,
 		
 		"low_battery":: #red,
 		"night_recharging":: #red,
@@ -541,7 +541,7 @@ species autonomousBike control: fsm skills: [moving] {
 	
 	aspect realistic {
 		color <- color_map[state];
-		draw triangle(60) color:color border:color rotate: heading + 90 ;
+		draw triangle(30) color:color border:color rotate: heading + 90 ;
 	} 
 
 	autonomousBikeLogger_roadsTraveled travelLogger;
@@ -914,7 +914,7 @@ species car control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
-		"wandering"::#transparent,
+		"wandering"::#dimgray,
 		
 		"low_fuel"::#red,
 		"night_refilling"::#red,
@@ -928,7 +928,7 @@ species car control: fsm skills: [moving] {
 	
 	aspect realistic {
 		color <- color_map[state];
-		draw triangle(60) color:color border:color rotate: heading + 90 ;
+		draw triangle(30) color:color border:color rotate: heading + 90 ;
 	} 
 
 	carLogger_roadsTraveled travelLogger;
@@ -998,6 +998,7 @@ species car control: fsm skills: [moving] {
 						
 		do reduceFuel(distanceTraveled);
 	}
+
 				
 	/* ========================================== STATE MACHINE ========================================= */
 			/* 
@@ -1027,11 +1028,15 @@ species car control: fsm skills: [moving] {
 			}
 			target <- nil;
 		}
-		
+				
 		if carType = "Electric"{
 			maxFuelCar <- 342000.0 #m;
+			reductionBEV <- 0.0;
+			reductionICE <- 40.26;
 		} else{
 			maxFuelCar <- 500000.0 #m;
+			reductionBEV <- 0.0;
+			reductionICE <- 0.0;
 		}
 		
 		/*transitions to different states, keeping track of the count*/
@@ -1205,32 +1210,37 @@ species NetworkingAgent skills:[network] {
  			} else if source = 3 {
  				if value = 1 {
  					traditionalScenario <- true;
+ 					
  				} else if value = 0 {
  					traditionalScenario <- false;
  				}
  			} else if source = 2 {
  				if value = 1 {
  					carType <- "Combustion";
+ 					reductionBEV <- 0.0;
+					reductionICE <- 0.0;
  				} else if value = 0 {
  					carType <- "Electric";
+ 					reductionBEV <- 0.0;
+					reductionICE <- 40.26;
  				}
  			} else if source = 4 {
  				if value = 1 {
  					rechargeRate <- "4.5hours";
+ 					chargeSpeed <- "Slow";
  				} else if value = 0 {
  					rechargeRate <- "111s";
+ 					chargeSpeed <- "Fast";
  				}
  			} else if source = 5 {
  				if value = 1 {
  					maxBatteryLifeAutonomousBike <- 35000.0 ;
+ 					batterySize <- "Small";
  				} else if value = 0 {
  					maxBatteryLifeAutonomousBike <- 65000.0 ;
+ 					batterySize <- "Large";
  				}
  			}
- 			
- 			write("change");
- 			write(source);
- 			write(value);
 		}
 	}
 }
