@@ -197,10 +197,10 @@ global {
 }
 
 experiment generalScenario type: gui {
-	int fontSize <- 14;
-	int x_val <- 180;
+	int fontSize <- 20;
+	int x_val <- 100;
 	int x_step <- 300;
-	int y_val <- 3100;
+	int y_val <- 3000;
 	int y_step <- 150;
 	string batterySize <- "Small";
 	string chargeSpeed <- "Slow";
@@ -208,25 +208,55 @@ experiment generalScenario type: gui {
 	float minimum_cycle_duration <- 0.050 #s;
 
     output {
-	    layout  horizontal ([ vertical ([0::5000,1::5000,2::2500])::2500, vertical ([3::5000 ,4::5000]) ::5000]) background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: false;
+	    layout  /*horizontal ([ vertical ([0::5000,1::5000,2::2500])::2500, vertical ([3::5000 ,4::5000]) ::5000])*/ background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
-		display reductionICE antialias: false type: java2D { 
-			chart "Reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false{
+		display reductionICE antialias: false type: java2D background: #black{ 
+			chart "Reduction vs. Combustion Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false position: {0,0} size:{1000,1300}{
 				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
 				data " " value: 100-round(reductionICE*100)/100 color: #darkgray;
 			}
 			graphics Strings {
-				draw " " + round(reductionICE*100)/100 + "%" at: {1500, 3200} color: #white font: font("Helvetica", 40, #bold);
+				draw " " + round(reductionICE*100)/100 + "%" at: {230, 780} color: #white font: font("Helvetica", 30, #bold);
+			}
+			chart "Reduction vs. Electric Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false position: {0,1300} size:{1000,1300}{ 
+				data "reduction %" value: round(reductionBEV*100)/100 color: #darkgreen;
+				data " " value: 100-round(reductionBEV*100)/100 color: #darkgray;
+			}
+			graphics Strings{
+				draw " " + round(reductionBEV*100)/100 + "%" at: {230, 2080} color: #white font: font("Helvetica", 30, #bold);
+			}
+			chart "CO2" type:histogram reverse_axes: true background: #black color: #white axes: #transparent title_font: font("Helvetica", 20, #bold) tick_line_color:#transparent y_range: [0.0, 60.0] x_serie_labels: "gCO2/km:" x_label: string(round(gramsCO2*100)/100) series_label_position: xaxis memorize:false position: {0,2600} size:{4000,500}{
+				data " "
+					style: bar
+					value: round(gramsCO2*100)/100
+					color: #red;
+			}
+			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 1810 memorize:false position: {1000,0} size:{2800,1300}{
+    			
+    			data "wandering cars" value: wanderCountCar color: #blue marker: false style: line;
+				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
+				data "car getting charge/fuel" value: getFuelCount color: #red marker: false style: line;
+				data "cars in use" value: inUseCountCar+pickUpCountCar color: #yellow marker: false style: line;
+				
+				data "wandering bikes" value: wanderCount color: #lightblue marker: false style: line;	
+				//data "bikes with low battery" value: lowBattCount color: #coral marker: false style: line;
+				data "bikes getting charge" value: getChargeCount color: #red marker: false style: line;
+				data "bikes in use" value: inUseCount+pickUpCount color: #lightgreen marker: false style: line;
+				//data "bikes night relocating" value: nightRelCount color: #plum marker: false style: line;
+   			}
+   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour)) x_tick_unit: 1810  memorize:false position: {1000,1300} size:{2800,1300}{
+				data "Wait Time" value: avgWait color: #pink marker: false style: line;
+				data "40 min" value: 40 color: #red marker: false style: line;
 			}
 		}
 				
-		display reductionBEV  antialias: false type: java2D {
+		/*display reductionBEV  antialias: false type: java2D {
 			chart "Reduction vs. Electric Cars" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 20, #bold) series_label_position: none memorize:false{ 
 				data "reduction %" value: round(reductionBEV*100)/100 color: #darkgreen;
 				data " " value: 100-round(reductionBEV*100)/100 color: #darkgray;
 			}
 			graphics Strings{
-				draw " " + round(reductionBEV*100)/100 + "%" at: {1500, 3200} color: #white font: font("Helvetica", 40, #bold);
+				draw " " + round(reductionBEV*100)/100 + "%" at: {1000, 1600} color: #white font: font("Helvetica", 40, #bold);
 			}
 		}
 		
@@ -237,10 +267,10 @@ experiment generalScenario type: gui {
 					value: round(gramsCO2*100)/100
 					color: #red;
 			}
-		}
+		}*/
 		
 		/* series graph for bike and car variables */
-		display vehicleTasks antialias: false axes: false {
+		/*display vehicleTasks antialias: false axes: false {
     		chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 20, #bold) axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Number of Vehicles" x_serie_labels: (string(current_date.hour))  x_tick_unit: 1810 memorize:false{
     			
     			data "wandering cars" value: wanderCountCar color: #blue marker: false style: line;
@@ -254,16 +284,16 @@ experiment generalScenario type: gui {
 				data "bikes in use" value: inUseCount+pickUpCount color: #lightgreen marker: false style: line;
 				//data "bikes night relocating" value: nightRelCount color: #plum marker: false style: line;
    			}
-    	}
+    	}*/
 		
     	/* series graph for last 10 (moving) average wait time */
 		
-		display avgWaitTime antialias: false axes: false {
+		/*display avgWaitTime antialias: false axes: false {
 			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 20, #bold) color: #white axes: #white tick_line_color:#transparent x_label: "Time of the Day" y_label: "Average Last 10 Wait Times (min)" x_serie_labels: (string(current_date.hour)) x_tick_unit: 1810  memorize:false{
 				data "Wait Time" value: avgWait color: #pink marker: false style: line;
 				data "40 min" value: 40 color: #red marker: false style: line;
 			}
-		}
+		}*/
 			
 		
 		display autonomousScenario type:opengl background: #black axes: false {	 
@@ -291,24 +321,39 @@ experiment generalScenario type: gui {
 				} if rechargeRate = "111s"{
 					chargeSpeed <- "Fast";
 				}
-				draw "Scenario" at: {x_val, y_val} color: #white font: font("Helvetica", fontSize, #bold);
+				draw triangle(40) at: {x_val+x_step*4, y_val + y_step - 20} color: #cyan;
+				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*3 - 20} color: #red;
+				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*2 - 20} color: #lime;
+				draw circle(20)at: {x_val+x_step*7, y_val + y_step - 20} color: #yellow;
+				draw circle(20)at: {x_val+x_step*7, y_val + y_step*2 - 20} color: #hotpink;
+				draw " = Restaurants" at: {x_val+x_step*7 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
 				if traditionalScenario{
-					draw "Current" at: {x_val, y_val+y_step} color: #white font: font("Helvetica", fontSize, #bold);
-					draw carType at: {x_val+x_step, y_val+y_step} color: #white font: font("Helvetica", fontSize, #bold);
+					draw " = Gas Stations" at: {x_val+x_step*7 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
 				} else{
-					draw "Future" at: {x_val, y_val+y_step} color: #white font: font("Helvetica", fontSize, #bold);
+					draw " = Charge Stations" at: {x_val+x_step*7 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);				
+				}
+				draw " = Cars in use" at: {x_val+x_step*4 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
+				draw " = Charging Vehicles" at: {x_val+x_step*4 + 50, y_val + y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
+				draw " = Autonomous micro-mobility in use" at: {x_val+x_step*4 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
+				draw ""+current_date at: {x_val+x_step*8.5, y_val+y_step*2} color: #white font: font("Helvetica", fontSize*2, #bold);
+				draw "SCENARIO" at: {x_val, y_val-10} color: #white font: font("Helvetica", fontSize, #bold);
+				if traditionalScenario{
+					draw "Current" at: {x_val+15, y_val+y_step+10} color: #white font: font("Helvetica", fontSize);
+					draw carType at: {x_val+x_step, y_val+y_step+10} color: #white font: font("Helvetica", fontSize);
+				} else{
+					draw "Future" at: {x_val+50, y_val+y_step+13} color: #white font: font("Helvetica", fontSize);
 					
-					draw "Battery" at: {x_val, y_val+y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
-					draw batterySize at: {x_val, y_val+y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
+					draw "BATTERY" at: {x_val+x_step, y_val+y_step*2-20} color: #white font: font("Helvetica", fontSize, #bold);
+					draw batterySize at: {x_val+x_step+50, y_val+y_step*3+5} color: #white font: font("Helvetica", fontSize);
 					
-					draw "Charge" at: {x_val+x_step, y_val+y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
-					draw chargeSpeed at: {x_val+x_step, y_val+y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
+					draw "CHARGE" at: {x_val, y_val+y_step*2-20} color: #white font: font("Helvetica", fontSize, #bold);
+					draw chargeSpeed at: {x_val+50, y_val+y_step*3+5} color: #white font: font("Helvetica", fontSize);
 					
-					draw "Num Vehicles" at: {x_val+x_step*2, y_val} color: #white font: font("Helvetica", fontSize, #bold);
-					draw ""+numAutonomousBikes at: {x_val+x_step*2.9, y_val+y_step/2.1} color: #white font: font("Helvetica", fontSize, #bold);
+					draw "NUM VEHICLES" at: {x_val+x_step*2, y_val-10} color: #white font: font("Helvetica", fontSize, #bold);
+					draw ""+numAutonomousBikes at: {x_val+x_step*3, y_val+y_step/2.4+10} color: #white font: font("Helvetica", fontSize);
 					
-					draw "Speed" at: {x_val+x_step*2, y_val+y_step*1.83} color: #white font: font("Helvetica", fontSize, #bold);
-					draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 + " km/h" at: {x_val+x_step*2.74,y_val+y_step*2.2} color: #white font: font("Helvetica", fontSize, #bold);
+					draw "SPEED [km/h]" at: {x_val+x_step*2, y_val+y_step*2-80} color: #white font: font("Helvetica", fontSize, #bold);
+					draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 at: {x_val+x_step*3,y_val+y_step*2.3-20} color: #white font: font("Helvetica", fontSize);
 					
 				}
 				//draw "UnservedTrips: " + unservedCount at: {0, 7000} color: #white font: font("Helvetica", 40, #plain);
