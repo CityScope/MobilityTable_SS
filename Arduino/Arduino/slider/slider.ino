@@ -52,7 +52,7 @@ void loop() {
     }
     Serial.print("2:");
     Serial.println(buttonState_A);
-    delay(200);
+    delay(0);
 
     B = BB;
     BB = digitalRead(BUTTON_B);
@@ -61,7 +61,7 @@ void loop() {
     }
     Serial.print("3:");
     Serial.println(buttonState_B);
-    delay(200);
+    delay(0);
 
     C = CC;
     CC = digitalRead(BUTTON_C);
@@ -70,7 +70,7 @@ void loop() {
     }
     Serial.print("4:");
     Serial.println(buttonState_C);
-    delay(200);
+    delay(0);
 
     D = DD;
     DD = digitalRead(BUTTON_D);
@@ -79,5 +79,5 @@ void loop() {
     }
     Serial.print("5:");
     Serial.println(buttonState_D);
-    delay(200);
+    delay(0);
 }
