@@ -29,6 +29,7 @@ global {
 	int nightRelCount <- 0;
 	int fleetsizeCount <- 0;
 	int unservedCount <- 0;
+	int totalCount <- 0;
 	
 	// Initial values storage of the simulation
 	int initial_ab_number <- numAutonomousBikes;
@@ -51,9 +52,9 @@ global {
 	
 	// wait time variables, used to create series graph in seeing package wait time progression
 	//int lessThanWait <- 0;
-	int moreThanWait <- nil;
+	int moreThanWait <- 0;
 	float timeWaiting <- 0.0;
-	float avgWait <- nil;
+	float avgWait <- 0.0;
 	list<float> timeList <- []; //list of wait times
 	
 	//env factor vars
@@ -255,7 +256,7 @@ species restaurant{
 	point rest;
 	
 	aspect base{
-		draw square(30) color:color;
+		draw circle(10) color:color;
 	}
 }
 
@@ -391,6 +392,8 @@ species package control: fsm skills: [moving] {
     		choice <- host.requestDeliveryMode(self);
     		if choice = 0 {
     			register <- 0;
+    		} else if register = 1 {
+    			totalCount <- totalCount + 1;
     		} else {
     			register <- 1;
     		}
@@ -1200,8 +1203,8 @@ species NetworkingAgent skills:[network] {
 			
  			list m <- string(mes.contents) split_with('[, ]');
  			
- 			int source <- m[0];
- 			int value <- m[1];
+ 			int source <- int(m[0]);
+ 			int value <- int(m[1]);
  			
  			if source = 0 {
  				PickUpSpeedAutonomousBike <- (20-value)/3.6;
