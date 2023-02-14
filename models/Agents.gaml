@@ -378,6 +378,7 @@ species package control: fsm skills: [moving] {
     	}
     	transition to: requestingDeliveryMode when: timeToTravel() {
     		final_destination <- target_point;
+    		totalCount <- totalCount + 1;
     	}
     	exit {
 			if register = 1 and (packageEventLog) {ask logger { do logExitState; }}
@@ -392,8 +393,6 @@ species package control: fsm skills: [moving] {
     		choice <- host.requestDeliveryMode(self);
     		if choice = 0 {
     			register <- 0;
-    		} else if register = 1 {
-    			totalCount <- totalCount + 1;
     		} else {
     			register <- 1;
     		}
@@ -530,6 +529,8 @@ species autonomousBike control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
+		"fleetsize"::#dimgray,
+		
 		"wandering"::#dimgray,
 		
 		"low_battery":: #red,
@@ -739,7 +740,7 @@ species autonomousBike control: fsm skills: [moving] {
 		transition to: picking_up_packages when: delivery != nil{wanderCount <- wanderCount - 1; pickUpCount <- pickUpCount + 1;}
 		transition to: low_battery when: setLowBattery() {wanderCount <- wanderCount - 1; lowBattCount <- lowBattCount + 1;}
 		transition to: night_recharging when: nightRechargeCond = true and setNightChargingTime() {nightorigin <- self.location; wanderCount <- wanderCount - 1; lowBattCount <- lowBattCount + 1;} // set condition for night charging
-		
+		transition to: fleetsize when: ((fleetsizeCount+wanderCount+lowBattCount+getChargeCount+nightRelCount+pickUpCount+inUseCount > numAutonomousBikes) and (delivery = nil)) {wanderCount <- wanderCount -1; fleetsizeCount <- fleetsizeCount + 1;}
 		if traditionalScenario and delivery = nil{
 			wanderCount <- wanderCount - 1;
 			do die;
@@ -1036,10 +1037,12 @@ species car control: fsm skills: [moving] {
 			maxFuelCar <- 342000.0 #m;
 			reductionBEV <- 0.0;
 			reductionICE <- 40.26;
+			gramsCO2 <- 107.53;
 		} else{
 			maxFuelCar <- 500000.0 #m;
 			reductionBEV <- 0.0;
 			reductionICE <- 0.0;
+			gramsCO2 <- 167.97;
 		}
 		
 		/*transitions to different states, keeping track of the count*/
@@ -1208,24 +1211,29 @@ species NetworkingAgent skills:[network] {
  			
  			if source = 0 {
  				PickUpSpeedAutonomousBike <- (20-value)/3.6;
+ 				RidingSpeedAutonomousBike <- PickUpSpeedAutonomousBike;
  			} else if source = 1 {
  				numAutonomousBikes <- 300-value*10;
  			} else if source = 3 {
  				if value = 1 {
  					traditionalScenario <- true;
+ 					y_max <- 170.0;
  					
  				} else if value = 0 {
  					traditionalScenario <- false;
+ 					y_max <- 60.0;
  				}
  			} else if source = 2 {
  				if value = 1 {
  					carType <- "Combustion";
  					reductionBEV <- 0.0;
 					reductionICE <- 0.0;
+					gramsCO2 <- 161.97;
  				} else if value = 0 {
  					carType <- "Electric";
  					reductionBEV <- 0.0;
 					reductionICE <- 40.26;
+					gramsCO2 <- 107.53;
  				}
  			} else if source = 4 {
  				if value = 1 {

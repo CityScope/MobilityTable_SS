@@ -9,7 +9,7 @@ global {
 	float step <- 4 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 06:00:00"); 
+	date starting_date <- date("2022-10-11 08:00:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
@@ -37,16 +37,16 @@ global {
 	bool roadsTraveledLog <- false parameter: "Roads Traveled Log" category: "Logs";
 	
 	//----------------------------------Scenarios-----------------------------
-	bool traditionalScenario <- false parameter: "Traditional Scenario" category: "Scenarios";
+	bool traditionalScenario <- true parameter: "Traditional Scenario" category: "Scenarios";
 	int numVehiclesPackageTraditional <- 35 ;
 	bool timetoreload <- false;
 	
 	//----------------------Autonomous Scenario-------------------------
 	//-----------------Autonomous Bike Parameters-----------------------
-	int numAutonomousBikes <- 100 min: 50 max: 300 parameter: "Number of Autonomous Bicycles:" category: "Autonomous Bicycle";
-	float PickUpSpeedAutonomousBike <-  5/3.6 #m/#s min: 5/3.6 #m/#s max: 20/3.6 #m/#s parameter: "Bike Speed (m/s):" category:  "Autonomous Bicycle";
+	int numAutonomousBikes <- 60 min: 50 max: 300 parameter: "Number of Autonomous Bicycles:" category: "Autonomous Bicycle";
+	float PickUpSpeedAutonomousBike <-  6/3.6 #m/#s min: 5/3.6 #m/#s max: 20/3.6 #m/#s parameter: "Bike Speed (m/s):" category:  "Autonomous Bicycle";
 	float RidingSpeedAutonomousBike <-  PickUpSpeedAutonomousBike;
-	float maxBatteryLifeAutonomousBike <- 65000.0 #m	min: 35000#m max: 65000#m step: 30000 parameter: "Battery Capacity (m):" category: "Autonomous Bicycle"; //battery capacity in m
+	float maxBatteryLifeAutonomousBike <- 35000.0 #m	min: 35000#m max: 65000#m step: 30000 parameter: "Battery Capacity (m):" category: "Autonomous Bicycle"; //battery capacity in m
 	
 	float minSafeBatteryAutonomousBike <- 0.25*maxBatteryLifeAutonomousBike #m; //Amount of battery at which we seek battery and that is always reserved when charging another bike
 	float nightSafeBatteryAutonomousBike <- 0.9*maxBatteryLifeAutonomousBike #m; 
@@ -60,7 +60,7 @@ global {
 	bool rechargeCond <- false;// parameter: "Battery Condition" category: "Autonomous Bicycle";
 	
 	string chargeSpeed <- "Slow" among: ["Slow", "Fast"];
-	string batterySize <- "Large" among: ["Small", "Large"];
+	string batterySize <- "Small" among: ["Small", "Large"];
 	//----------------------Traditional Scenario-------------------------
 	//------------------------Car Parameters------------------------------
 	// Data extracted from: https://www.thecoldwire.com/how-many-miles-does-a-full-tank-of-gas-last/
@@ -81,7 +81,9 @@ global {
     float maxWaitTimePackage <- 60 #mn parameter: "Maximum Wait Time Package (s):" category: "Package";
 	float maxDistancePackage_AutonomousBike <- maxWaitTimePackage*PickUpSpeedAutonomousBike #m;
 	float maxDistancePackage_Car <- maxWaitTimePackage*RidingSpeedCar#m;
-     
+    
+    //--------------------------CO2 graph-------------
+    float y_max <- 170.0; 
     //--------------------------Demand Parameters-----------------------------
     string cityDemandFolder <- "./../includes/Demand";
     csv_file pdemand_csv <- csv_file (cityDemandFolder+ "/fooddeliverytrips_tangibletable.csv",true);
