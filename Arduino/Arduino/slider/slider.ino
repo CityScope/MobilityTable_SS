@@ -35,15 +35,16 @@ void setup() {
 
 void loop() {
     
+    Serial.print(",");
     Serial.print("0:");
     Serial.print(int(analogRead(PIN_SLIDE_A)*5.0/1024*3));
-    Serial.println(" ");
-    delay(500);
+    Serial.print(",");
+    delay(0);
 
     Serial.print("1:");
     Serial.print(int(analogRead(PIN_SLIDE_B)*5.0/1024*5));
-    Serial.println("  ");
-    delay(500);
+    Serial.print(",");
+    delay(0);
 
     A = AA;
     AA = digitalRead(BUTTON_A);
@@ -51,7 +52,8 @@ void loop() {
       buttonState_A = !buttonState_A;
     }
     Serial.print("2:");
-    Serial.println(buttonState_A);
+    Serial.print(buttonState_A);
+    Serial.print(",");
     delay(0);
 
     B = BB;
@@ -60,7 +62,8 @@ void loop() {
       buttonState_B = !buttonState_B;
     }
     Serial.print("3:");
-    Serial.println(buttonState_B);
+    Serial.print(buttonState_B);
+    Serial.print(",");
     delay(0);
 
     C = CC;
@@ -69,7 +72,8 @@ void loop() {
       buttonState_C = !buttonState_C;
     }
     Serial.print("4:");
-    Serial.println(buttonState_C);
+    Serial.print(buttonState_C);
+    Serial.print(",");
     delay(0);
 
     D = DD;
@@ -78,6 +82,7 @@ void loop() {
       buttonState_D = !buttonState_D;
     }
     Serial.print("5:");
-    Serial.println(buttonState_D);
+    Serial.print(buttonState_D);
+    Serial.println();
     delay(0);
 }

@@ -237,7 +237,11 @@ species chargingStation{
 	int capacity;
 	
 	aspect base{
-		draw circle(10) color:color border:#purple;
+		if self.autonomousBikesToCharge != 0 {
+			draw circle(10) color:color border:#purple;
+		} else {
+			draw circle(10) color:#transparent border:#transparent;
+		}
 	}
 	
 	reflex chargeBikes {
@@ -286,6 +290,11 @@ species gasstation{
 	}
 }*/
 
+species shade control: fsm skills: [moving] {
+	
+	
+}
+
 species package control: fsm skills: [moving] {
 
 	rgb color;
@@ -311,6 +320,25 @@ species package control: fsm skills: [moving] {
 		"delivered":: #transparent,
 		
 		"unserved":: #transparent
+	];
+	
+	int size;
+	
+	map<string, int> size_map <- [
+    	  	
+    	"firstmile":: 10,
+    	
+    	"requestingDeliveryMode":: 40,
+    	
+		"awaiting_autonomousBike":: 10,
+		"awaiting_car":: 10,
+		
+		"delivering_autonomousBike":: 20,
+		"delivering_car":: 20,
+		
+		"lastmile":: 10,
+		
+		"retry":: 40		
 	];
 	
 	packageLogger logger;
@@ -341,10 +369,11 @@ species package control: fsm skills: [moving] {
     float waitTime;
     float tripdistance;
     int choice;
-        
+            
 	aspect base {
     	color <- color_map[state];
-    	draw square(15) color: color border: #black;
+    	size <- size_map[state];
+    	draw square(size) color: color ;
     }
     
 	action deliver_ab(autonomousBike ab){
@@ -529,15 +558,15 @@ species autonomousBike control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
-		"fleetsize"::#dimgray,
+		"fleetsize"::#transparent,
 		
-		"wandering"::#dimgray,
+		"wandering"::#lime,
 		
 		"low_battery":: #red,
 		"night_recharging":: #red,
 		"getting_charge":: #red,
 		"getting_night_charge":: #red,
-		"night_relocating":: #springgreen,
+		"night_relocating":: #red,
 		
 		"picking_up_packages"::#lime,
 		"in_use_packages"::#lime
@@ -918,13 +947,13 @@ species car control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
-		"wandering"::#dimgray,
+		"wandering"::#cyan,
 		
 		"low_fuel"::#red,
 		"night_refilling"::#red,
 		"getting_fuel"::#red,
 		"getting_night_fuel"::#red,
-		"night_relocating"::#orangered,
+		"night_relocating"::#red,
 		
 		"picking_up_packages"::#cyan,
 		"in_use_packages"::#cyan
@@ -1199,22 +1228,38 @@ species car control: fsm skills: [moving] {
 
 species NetworkingAgent skills:[network] {
 	
+	int numAB_slider <- 30;
+	int speed_slider <- 30;
+	int scenario_button <- 2;
+	int car_button <- 2;
+	int charge_button <- 2;
+	int battery_button <- 2;
+	
 	reflex fetch when:has_more_message() {	
 		
 		loop while:has_more_message(){
 			message mes <- fetch_message();	
+			list mes_filter_1 <- string(mes.contents) split_with('[,]');
+			list mes_filter_2 <- string(mes_filter_1[1]) split_with('[,]');
+			list mes_filter_3 <- string(mes_filter_2) split_with('[:]');
+			string source_string <- replace(mes_filter_3[0],"'","");
+			int source <- int(source_string);
+			string value_string <- replace(mes_filter_3[1],"'","");
+			int value <- int(value_string);
+			write("" + source + " " + value);
 			
- 			list m <- string(mes.contents) split_with('[, ]');
+ 			//list m <- string(mes.contents) split_with('[, ]');
+ 			//int source <- int(m[0]);
+ 			//int value <- int(m[1]);
  			
- 			int source <- int(m[0]);
- 			int value <- int(m[1]);
- 			
- 			if source = 0 {
+ 			if source = 0 and value != speed_slider {
  				PickUpSpeedAutonomousBike <- (20-value)/3.6;
  				RidingSpeedAutonomousBike <- PickUpSpeedAutonomousBike;
- 			} else if source = 1 {
+ 				speed_slider <- value;
+ 			} else if source = 1 and value != numAB_slider{
  				numAutonomousBikes <- 300-value*10;
- 			} else if source = 3 {
+ 				numAB_slider <- value;
+ 			} else if source = 3 and value != scenario_button {
  				if value = 1 {
  					traditionalScenario <- true;
  					y_max <- 170.0;
@@ -1223,7 +1268,8 @@ species NetworkingAgent skills:[network] {
  					traditionalScenario <- false;
  					y_max <- 60.0;
  				}
- 			} else if source = 2 {
+ 				scenario_button <- value;
+ 			} else if source = 2 and value != car_button {
  				if value = 1 {
  					carType <- "Combustion";
  					reductionBEV <- 0.0;
@@ -1235,7 +1281,8 @@ species NetworkingAgent skills:[network] {
 					reductionICE <- 40.26;
 					gramsCO2 <- 107.53;
  				}
- 			} else if source = 4 {
+ 				car_button <- value;
+ 			} else if source = 4 and value != charge_button{
  				if value = 1 {
  					rechargeRate <- "4.5hours";
  					chargeSpeed <- "Slow";
@@ -1243,7 +1290,8 @@ species NetworkingAgent skills:[network] {
  					rechargeRate <- "111s";
  					chargeSpeed <- "Fast";
  				}
- 			} else if source = 5 {
+ 				charge_button <- value;
+ 			} else if source = 5 and value != battery_button {
  				if value = 1 {
  					maxBatteryLifeAutonomousBike <- 35000.0 ;
  					batterySize <- "Small";
@@ -1251,6 +1299,7 @@ species NetworkingAgent skills:[network] {
  					maxBatteryLifeAutonomousBike <- 65000.0 ;
  					batterySize <- "Large";
  				}
+ 				battery_button <- value;
  			}
 		}
 	}

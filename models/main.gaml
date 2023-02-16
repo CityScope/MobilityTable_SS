@@ -15,8 +15,8 @@ global {
 	list<int> chargingStationLocation;
 	
 	// UDP connection
-	int port <- 9877;
-	string url <- "localhost";	
+	/*int port <- 9877;
+	string url <- "localhost";*/	
 	
     // ---------------------------------------Agent Creation----------------------------------------------
 	init{
@@ -145,9 +145,14 @@ global {
 		}
 		
 		// UDP connection
-		create NetworkingAgent number: 1 {
+		/*create NetworkingAgent number: 1 {
 		   do connect to: url protocol: "udp_server" port: port ;
-		}	
+		}*/	
+		
+		// Arduino connection
+		create NetworkingAgent number: 1 {
+		   do connect protocol: "arduino" to:"COM4";
+		}
 		
 		write "FINISH INITIALIZATION";
 		initial_hour <- current_date.hour;
@@ -188,6 +193,31 @@ global {
 		unservedCount <- 0;
 		totalCount <- 0;
 	}
+	
+	/*reflex reset_demand when: current_date.hour = 0 and current_date.minute = 0{
+		create package from: pdemand_csv with:
+		[start_hour::date(get("start_time")),
+				start_lat::float(get("start_latitude")),
+				start_lon::float(get("start_longitude")),
+				target_lat::float(get("end_latitude")),
+				target_lon::float(get("end_longitude"))	
+		]{
+			
+			start_point  <- to_GAMA_CRS({start_lon,start_lat},"EPSG:4326").location;
+			target_point  <- to_GAMA_CRS({target_lon,target_lat},"EPSG:4326").location;
+			location <- start_point;
+			initial_closestPoint <- (road closest_to start_point using topology(road));
+			final_closestPoint <- (road closest_to target_point using topology(road));
+			
+			string start_h_str <- string(start_hour,'kk');
+			start_h <-  int(start_h_str);
+			if start_h = 24 {
+				start_h <- 0;
+			}
+			string start_min_str <- string(start_hour,'mm');
+			start_min <- int(start_min_str);
+		}
+	}*/
 	
 	/*reflex stop_simulation when: cycle >= numberOfDays * numberOfHours * 3600 / step {
 		timetoreload <- true;
@@ -302,13 +332,13 @@ experiment generalScenario type: gui {
 				
 		display agentSimulation type:opengl background: #black axes: false {	 
 			// species building aspect: type visible:show_building ;
-			species road aspect: base visible:show_road;
+			species road aspect: base visible:show_road transparency: 0.5;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
 			species chargingStation aspect: base visible:(!traditionalScenario and show_chargingStation);
-			species restaurant aspect:base visible:show_restaurant;
-			species autonomousBike aspect: realistic visible:show_autonomousBike trace:15 fading: true;
-			species car aspect: realistic visible:show_car trace:10 fading: true; 
-			species package aspect:base visible:show_package;
+			//species restaurant aspect:base visible:show_restaurant;
+			species autonomousBike aspect: realistic visible:show_autonomousBike trace:5 fading: true;
+			species car aspect: realistic visible:show_car trace:5 fading: true; 
+			species package aspect:base visible:show_package transparency: 0;
 				
 			event["b"] {show_building<-!show_building;}
 			event["r"] {show_road<-!show_road;}
