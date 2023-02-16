@@ -151,7 +151,7 @@ global {
 		
 		// Arduino connection
 		create NetworkingAgent number: 1 {
-		   do connect protocol: "arduino" to:"COM4";
+		   do connect protocol: "arduino" to:"COM3";
 		}
 		
 		write "FINISH INITIALIZATION";
@@ -228,7 +228,7 @@ global {
 }
 
 experiment generalScenario type: gui {
-	int fontSize <- 20;
+	int fontSize <- 5;
 	int x_val <- 100;
 	int x_step <- 300;
 	int y_val <- 3000;
@@ -239,7 +239,7 @@ experiment generalScenario type: gui {
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
-		display frontend antialias: false type: java2D background: #black{ 
+		display frontend  antialias: false type: java2D background: #black{ 
 			graphics Strings{
 				draw "AUTONOMOUS MICRO-MOBILITY VS CARS" at: {500,90} color: #white font: font("Helvetica", 25,  #bold);
 				draw "FOR FOOD DELIVERIES" at: {1050,200} color: #white font: font("Helvetica", 25,  #bold);
@@ -248,18 +248,27 @@ experiment generalScenario type: gui {
 					draw "Future Scenario: Autonomous Micro-Mobility" at: {790,380} color: #white font: font("Helvetica", 20,  #bold);
 					draw rectangle(3000,150) at: {1880, 350} color: #white wireframe: true;
 				} else {
-					draw "Current Scenario: Cars" at: {1300,380} color: #white font: font("Helvetica", 20,  #bold);
+					draw "Current Scenario: Cars" at: {1300,380} color: #white font: font("Helvetica", 25,  #bold);
 					draw rectangle(3000,150) at: {1880, 350} color: #white wireframe: true;
 				}
 			}
-			chart "" type: histogram style: bar background: #black title_font: font("Helvetica",15,#bold) color: #white y_range: [0.0,y_max] memorize:false position: {230,600} size:{500,500}{
-				data "" value: round(gramsCO2*100)/100 	color: #red;
+			chart "" type: histogram reverse_axes: true style: stack x_tick_values_visible: false background: #black title_font: font("Helvetica",15,#bold) color: #white y_range: [0.0,170.0] y_tick_unit: 10 memorize:false position: {100,575} size:{2500,200}{
+				data "" value: round(gramsCO2*100)/100 	color: diagram_color;
+				data " " value: (107.53-round(gramsCO2*100)/100) color: #darkgray ;
+				data "  " value: (top_value) color: #dimgray;
 			}
 			graphics Strings {
-				draw "gCO2/km traveled" at: {180, 550} color: #white font: font("Helvetica", 15, #bold);
-				draw "" + round(gramsCO2*100)/100 at: {450, 1080} color: #white font: font("Helvetica", 12, #bold);
+				draw "gCO2/km traveled" at: {1050, 525} color: #white font: font("Helvetica", 15, #bold);
+				if traditionalScenario and carType = "Combustion" {
+					draw "" + round(gramsCO2*100)/100 at: {1250, 685} color: #white font: font("Helvetica", 12, #bold);
+				} else if traditionalScenario and carType = "Electric" {
+					draw "" + round(gramsCO2*100)/100 at: {750, 685} color: #white font: font("Helvetica", 12, #bold);
+				} else {
+					draw "" + round(gramsCO2*100)/100 at: {275, 685} color: #black font: font("Helvetica", 12, #bold);
+				}
+				draw rectangle(4000,65) at: {1880, 725} color: #black;
 			}
-			chart "" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 15, #bold) series_label_position: none memorize:false position: {850,600} size:{1000,550}{
+			/*chart "" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 15, #bold) series_label_position: none memorize:false position: {850,600} size:{1000,550}{
 				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
 				data " " value: 100-round(reductionICE*100)/100 color: #darkgray;
 			}
@@ -276,14 +285,14 @@ experiment generalScenario type: gui {
 				draw "CO2 reduction compared" at: {1960, 550} color: #white font: font("Helvetica", 15, #bold);
 				draw "to Electric Cars" at: {2150, 630} color: #white font: font("Helvetica", 15, #bold);
 				draw " " + round(reductionBEV*100)/100 + "%" at: {2230, 900} color: #white font: font("Helvetica", 20, #bold);
-			}
+			}*/
 			graphics Strings {
-				draw "Unserved trips" at: {3050, 550} color: #white font: font("Helvetica", 15, #bold) ;
-				draw "" + unservedCount at: {3100,900} color: #red font:(font("Helvetica",25,#bold));
-				draw "/" at: {3350,900} color: #dimgray font:(font("Helvetica",25,#bold));
-				draw "" + totalCount at: {3400,900} color: #dimgray font:(font("Helvetica",25,#bold));
+				draw "Unserved trips" at: {3050, 525} color: #white font: font("Helvetica", 15, #bold) ;
+				draw "" + unservedCount at: {3000,700} color: #red font:(font("Helvetica",35,#bold));
+				draw "/" at: {3350,700} color: #dimgray font:(font("Helvetica",25,#bold));
+				draw "" + totalCount at: {3400,700} color: #dimgray font:(font("Helvetica",25,#bold));
 			}
-			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 15, #bold) title_visible: false axes: #white tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour))  x_tick_unit: 1810 memorize:false position: {100,1200} size:{3000,900} series_label_position: none{
+			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 15, #bold) title_visible: false axes: #white tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour))  x_tick_unit: 1810 memorize:false position: {100,800} size:{3000,600} series_label_position: none{
     			
     			data "Idling Cars" value: wanderCountCar color: #dimgray marker: false style: line ;
 				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
@@ -297,42 +306,43 @@ experiment generalScenario type: gui {
 				//data "bikes night relocating" value: nightRelCount color: #plum marker: false style: line;
    			}
    			graphics Strings {
-				draw "Number of vehicles" rotate: 270 at: {-90, 1600} color: #white font: font("Helvetica", 10, #bold);
-				draw "Vehicle tasks" at: {1550, 1190} color: #white font: font("Helvetica", 15, #bold);
-				draw rectangle(50,10) at: {3150, 1390} color: #lime;
-				draw rectangle(50,10) at: {3150, 1490} color: #cyan;
-				draw rectangle(50,10) at: {3150, 1590} color: #dimgray;
-				draw rectangle(50,10) at: {3150, 1690} color: #red;
+				draw "Number of vehicles" rotate: 270 at: {-90, 1050} color: #white font: font("Helvetica", 10, #bold);
+				draw "Vehicle tasks" at: {1550, 775} color: #white font: font("Helvetica", 15, #bold);
+				draw rectangle(50,10) at: {3150, 990} color: #lime;
+				draw rectangle(50,10) at: {3150, 1050} color: #cyan;
+				draw rectangle(50,10) at: {3150, 1110} color: #dimgray;
+				draw rectangle(50,10) at: {3150, 1170} color: #red;
 				
-				draw "Micro-mobility in use" at: {3200, 1400} color: #white font: font("Helvetica", 10, #bold);
-				draw "Cars in use" at: {3200, 1500} color: #white font: font("Helvetica", 10, #bold);
-				draw "Vehicles idling" at: {3200, 1600} color: #white font: font("Helvetica", 10, #bold);
-				draw "Recharging/Refilling" at: {3200, 1700} color: #white font: font("Helvetica", 10, #bold);
+				draw "Micro-mobility in use" at: {3200, 1000} color: #white font: font("Helvetica", 10, #bold);
+				draw "Cars in use" at: {3200, 1060} color: #white font: font("Helvetica", 10, #bold);
+				draw "Vehicles idling" at: {3200, 1120} color: #white font: font("Helvetica", 10, #bold);
+				draw "Recharging/Refilling" at: {3200, 1180} color: #white font: font("Helvetica", 10, #bold);
 				list date_time <- string(current_date) split_with (" ",true);
-				draw ("" + date_time[1]) at: {3150, 2025} color: #white font: font("Helvetica", 15, #bold);
-				draw "Time of the day" at: {1600, 2120} color: #white font: font("Helvetica", 8, #bold);
+				draw ("" + date_time[1]) at: {3150, 1350} color: #white font: font("Helvetica", 15, #bold);
+				draw "Time of the day" at: {1600, 1420} color: #white font: font("Helvetica", 8, #bold);
 			}
-   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 15, #bold) title_visible: false color: #white axes: #white y_range:[0,120] tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour)) x_tick_unit: 1810  memorize:false position: {100,2200} size:{3000,900} series_label_position: none {
+   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 15, #bold) title_visible: false color: #white axes: #white y_range:[0,120] tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour)) x_tick_unit: 1810  memorize:false position: {100,1525} size:{3000,600} series_label_position: none {
 				data "Wait Time" value: avgWait color: #pink marker: false style: line;
 				data "40 min" value: 40 color: #red marker: false style: line;
 			}
 			graphics Strings {
-				draw "Moving average wait time [min]" rotate: 270 at: {-220, 2600} color: #white font: font("Helvetica", 10, #bold);
-				draw "Wait time" at: {1600, 2200} color: #white font: font("Helvetica", 15, #bold);
-				draw rectangle(50,10) at: {3150, 2600} color: #red;
-				draw rectangle(50,10) at: {3150, 2700} color: #pink;
+				draw "Moving average wait time [min]" rotate: 270 at: {-220, 1800} color: #white font: font("Helvetica", 10, #bold);
+				draw "Wait time" at: {1600, 1500} color: #white font: font("Helvetica", 15, #bold);
+				draw rectangle(50,10) at: {3150, 1750} color: #red;
+				draw rectangle(50,10) at: {3150, 1800} color: #pink;
 				
-				draw "40 minutes" at: {3200, 2610} color: #white font: font("Helvetica", 10, #bold);
-				draw "Wait time" at: {3200, 2710} color: #white font: font("Helvetica", 10, #bold);
+				draw "40 minutes" at: {3200, 1760} color: #white font: font("Helvetica", 10, #bold);
+				draw "Wait time" at: {3200, 1810} color: #white font: font("Helvetica", 10, #bold);
 				list date_time <- string(current_date) split_with (" ",true);
-				draw ("" + date_time[1]) at: {3150, 3030} color: #white font: font("Helvetica", 15, #bold);
-				draw "Time of the day" at: {1600, 3120} color: #white font: font("Helvetica", 8, #bold);
+				draw ("" + date_time[1]) at: {3150, 2080} color: #white font: font("Helvetica", 15, #bold);
+				draw "Time of the day" at: {1600, 2150} color: #white font: font("Helvetica", 8, #bold);
 			}
 		}
+		
 				
 		display agentSimulation type:opengl background: #black axes: false {	 
 			// species building aspect: type visible:show_building ;
-			species road aspect: base visible:show_road transparency: 0.5;
+			species road aspect: base visible:show_road transparency: 0;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
 			species chargingStation aspect: base visible:(!traditionalScenario and show_chargingStation);
 			//species restaurant aspect:base visible:show_restaurant;
@@ -378,7 +388,7 @@ experiment generalScenario type: gui {
 					draw " = Charge Stations" at: {x_val+x_step*10 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);				
 				}
 				list date_time <- string(current_date) split_with (" ",true);
-				draw ("" + date_time[1]) at: {x_val+x_step*10-20, y_val + y_step*3} color: #white font: font("Helvetica", 30, #bold);
+				draw ("" + date_time[1]) at: {x_val+x_step*10-20, y_val + y_step*3} color: #white font: font("Helvetica", 7, #bold);
 				
 				draw "SCENARIO" at: {x_val, y_val+100} color: #white font: font("Helvetica", fontSize, #bold);
 				draw rectangle(300,260)  border: #white wireframe: true at: {x_val+130,y_val+150};
@@ -387,11 +397,11 @@ experiment generalScenario type: gui {
 					draw "TYPE" at: {x_val+x_step+60, y_val+100} color: #white font: font("Helvetica", fontSize, #bold);
 					draw carType at: {x_val+x_step+20, y_val+y_step+100} color: #white font: font("Helvetica", fontSize);
 					draw rectangle(300,260)  border: #white wireframe: true at: {x_val+x_step+140,y_val+150};
-					draw "Current Scenario: Cars" at: {x_val+x_step*9, y_val - 100} color: #white font: font("Helvetica", 30, #bold);
+					draw "Current Scenario: Cars" at: {x_val+x_step*9, y_val - 100} color: #white font: font("Helvetica", 7, #bold);
 					draw rectangle(1000,250)  border: #white wireframe: true at: {x_val+x_step*10.3,y_val-120};
 				} else{
-					draw "Future Scenario" at: {x_val+x_step*9.35, y_val - 150} color: #white font: font("Helvetica", 30, #bold);
-					draw "Autonomous Micro-Mobility" at: {x_val+x_step*8.75, y_val - 50} color: #white font: font("Helvetica", 30, #bold);
+					draw "Future Scenario" at: {x_val+x_step*9.35, y_val - 150} color: #white font: font("Helvetica", 7, #bold);
+					draw "Autonomous Micro-Mobility" at: {x_val+x_step*8.75, y_val - 50} color: #white font: font("Helvetica", 7, #bold);
 					draw rectangle(1000,250)  border: #white wireframe: true at: {x_val+x_step*10.3,y_val-120};
 					
 					draw "Future" at: {x_val+50, y_val+y_step+100} color: #white font: font("Helvetica", fontSize);

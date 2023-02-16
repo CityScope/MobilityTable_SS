@@ -675,7 +675,8 @@ species autonomousBike control: fsm skills: [moving] {
 				ask eventLogger { do logEnterState; }
 				ask travelLogger { do logRoads(0.0);}
 			}
-			
+			diagram_color <- #lime;
+			top_value <- 161.97-107.53;
 			target <- nil;
 		}
 		
@@ -1067,11 +1068,15 @@ species car control: fsm skills: [moving] {
 			reductionBEV <- 0.0;
 			reductionICE <- 40.26;
 			gramsCO2 <- 107.53;
+			diagram_color <- #tomato;
+			top_value <- 161.97-107.53;
 		} else{
 			maxFuelCar <- 500000.0 #m;
 			reductionBEV <- 0.0;
 			reductionICE <- 0.0;
-			gramsCO2 <- 167.97;
+			gramsCO2 <- 161.97;
+			diagram_color <- #red;
+			top_value <- 0.0;
 		}
 		
 		/*transitions to different states, keeping track of the count*/
@@ -1262,11 +1267,9 @@ species NetworkingAgent skills:[network] {
  			} else if source = 3 and value != scenario_button {
  				if value = 1 {
  					traditionalScenario <- true;
- 					y_max <- 170.0;
  					
  				} else if value = 0 {
  					traditionalScenario <- false;
- 					y_max <- 60.0;
  				}
  				scenario_button <- value;
  			} else if source = 2 and value != car_button {

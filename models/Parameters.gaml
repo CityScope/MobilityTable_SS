@@ -83,7 +83,8 @@ global {
 	float maxDistancePackage_Car <- maxWaitTimePackage*RidingSpeedCar#m;
     
     //--------------------------CO2 graph-------------
-    float y_max <- 170.0; 
+	rgb diagram_color;
+	float top_value;
     //--------------------------Demand Parameters-----------------------------
     string cityDemandFolder <- "./../includes/Demand";
     csv_file pdemand_csv <- csv_file (cityDemandFolder+ "/fooddeliverytrips_tangibletable.csv",true);
