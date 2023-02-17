@@ -159,7 +159,7 @@ experiment generalScenario type: gui {
 	int y_val <- 3000;
 	int y_step <- 150;
 		
-	float minimum_cycle_duration <- 0.070 #s;
+	float minimum_cycle_duration <- 0.065 #s;
 
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
@@ -308,30 +308,32 @@ experiment generalScenario type: gui {
 				} if rechargeRate = "111s"{
 					chargeSpeed <- "Fast";
 				}
-				draw triangle(40) at: {x_val+x_step*4, y_val + y_step - 20} color: #lime;
-				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*2 - 20} color: #cyan;
-				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*3 - 20} color: #dimgray;
-				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*4 - 20} color: #red;
-				draw " = Micro-mobility in use" at: {x_val+x_step*4 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
-				draw " = Cars in use" at: {x_val+x_step*4 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
-				draw " = Vehicles idling" at: {x_val+x_step*4 + 50, y_val + y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
-				draw " = Vehicles charging" at: {x_val+x_step*4 + 50, y_val + y_step*4} color: #white font: font("Helvetica", fontSize, #bold);
-				draw square(20) at: {x_val+x_step*6.3, y_val + y_step - 20} color: #lime;
-				draw square(20) at: {x_val+x_step*6.3, y_val + y_step*2 - 20} color: #cyan;
-				draw square(20) at: {x_val+x_step*6.3, y_val + y_step*3 - 20} color: #red;
-				draw " = Food order transported by micro-mobility" at: {x_val+x_step*6.3 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
-				draw " = Food order transported by car" at: {x_val+x_step*6.3 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
-				draw " = Food order requesting delivery mode" at: {x_val+x_step*6.3 + 50, y_val + y_step*3} color: #white font: font("Helvetica", fontSize, #bold);
-				draw circle(20)at: {x_val+x_step*10, y_val + y_step - 20} color: #yellow;
-				draw circle(20)at: {x_val+x_step*10, y_val + y_step*2 - 20} color: #hotpink;
-				draw " = Restaurants" at: {x_val+x_step*10 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
+				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*1.5 - 20} color: (#lime-200) rotate: 90;
+				draw triangle(40) at: {x_val+x_step*4+15, y_val + y_step*1.5 - 20} color: (#lime-150) rotate: 90;
+				draw triangle(40) at: {x_val+x_step*4+30, y_val + y_step*1.5 - 20} color: (#lime-100) rotate: 90;
+				draw triangle(40) at: {x_val+x_step*4, y_val + y_step*2.5 - 20} color: #cyan-200 rotate: 90;
+				draw triangle(40) at: {x_val+x_step*4+15, y_val + y_step*2.5 - 20} color: #cyan-150 rotate: 90;
+				draw triangle(40) at: {x_val+x_step*4+30, y_val + y_step*2.5 - 20} color: #cyan-100 rotate: 90;		
+				draw triangle(40) at: {x_val+x_step*4+15, y_val + y_step*3.5 - 20} color: #red rotate: 90;
+				draw " = Micro-mobility" at: {x_val+x_step*4 + 80, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Cars" at: {x_val+x_step*4 + 80, y_val + y_step*2.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Vehicles charging" at: {x_val+x_step*4 + 80, y_val + y_step*3.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw squircle(40,1.5) at: {x_val+x_step*7-50, y_val + y_step*1.5 - 20} color: #limegreen border: #palegreen width: 3;
+				draw squircle(40,1.5) at: {x_val+x_step*7-50, y_val + y_step*2.5 - 20} color: #dodgerblue border: #paleturquoise width: 3;
+				draw squircle(40,1.5) at: {x_val+x_step*7-50, y_val + y_step*3.5 - 20} color: #red border: #salmon width: 3;
+				draw " = Food delivery by AMM" at: {x_val+x_step*7, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Food delyvery by car" at: {x_val+x_step*7, y_val + y_step*2.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Food waiting" at: {x_val+x_step*7, y_val + y_step*3.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				//draw circle(20)at: {x_val+x_step*10, y_val + y_step - 20} color: #yellow;
+				draw circle(20)at: {x_val+x_step*10, y_val + y_step*1.5 - 20} color: #purple;
+				//draw " = Restaurants" at: {x_val+x_step*10 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);
 				if traditionalScenario{
-					draw " = Gas Stations" at: {x_val+x_step*10 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);
+					draw " = Gas Stations" at: {x_val+x_step*10 + 50, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
 				} else{
-					draw " = Charge Stations" at: {x_val+x_step*10 + 50, y_val + y_step*2} color: #white font: font("Helvetica", fontSize, #bold);				
+					draw " = Charge Stations" at: {x_val+x_step*10 + 50, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);				
 				}
 				list date_time <- string(current_date) split_with (" ",true);
-				draw ("" + date_time[1]) at: {x_val+x_step*10-20, y_val + y_step*3} color: #white font: font("Helvetica", 7, #bold);
+				draw ("" + date_time[1]) at: {x_val+x_step*10-20, y_val + y_step*3} color: #white font: font("Helvetica", fontSize+5, #bold);
 				
 				draw "SCENARIO" at: {x_val, y_val+100} color: #white font: font("Helvetica", fontSize, #bold);
 				draw rectangle(300,260)  border: #white wireframe: true at: {x_val+130,y_val+150};
@@ -340,12 +342,12 @@ experiment generalScenario type: gui {
 					draw "TYPE" at: {x_val+x_step+60, y_val+100} color: #white font: font("Helvetica", fontSize, #bold);
 					draw carType at: {x_val+x_step+20, y_val+y_step+100} color: #white font: font("Helvetica", fontSize);
 					draw rectangle(300,260)  border: #white wireframe: true at: {x_val+x_step+140,y_val+150};
-					draw "Current Scenario: Cars" at: {x_val+x_step*9, y_val - 100} color: #white font: font("Helvetica", 7, #bold);
-					draw rectangle(1000,250)  border: #white wireframe: true at: {x_val+x_step*10.3,y_val-120};
+					draw "Current Scenario: Cars" at: {x_val+x_step*9.1, y_val - 50} color: #white font: font("Helvetica", fontSize+2, #bold);
+					draw rectangle(1000,250)  border: #white wireframe: true at: {x_val+x_step*10.3,y_val-70};
 				} else{
-					draw "Future Scenario" at: {x_val+x_step*9.35, y_val - 150} color: #white font: font("Helvetica", 7, #bold);
-					draw "Autonomous Micro-Mobility" at: {x_val+x_step*8.75, y_val - 50} color: #white font: font("Helvetica", 7, #bold);
-					draw rectangle(1000,250)  border: #white wireframe: true at: {x_val+x_step*10.3,y_val-120};
+					draw "Future Scenario" at: {x_val+x_step*9.4, y_val - 100} color: #white font: font("Helvetica", fontSize+2, #bold);
+					draw "Autonomous Micro-Mobility" at: {x_val+x_step*8.8, y_val} color: #white font: font("Helvetica", fontSize+2, #bold);
+					draw rectangle(1000,250)  border: #white wireframe: true at: {x_val+x_step*10.3,y_val-70};
 					
 					draw "Future" at: {x_val+50, y_val+y_step+100} color: #white font: font("Helvetica", fontSize);
 					

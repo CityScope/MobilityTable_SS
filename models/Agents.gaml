@@ -374,11 +374,11 @@ species package control: fsm skills: [moving] {
 		"unserved":: #transparent
 	];
 	
-	float size;
+	int size;
 	
 	map<string, int> size_map <- [
     	  	
-    	"firstmile":: 10.0,
+    	"firstmile":: 10,
     	
     	"requestingDeliveryMode":: 30,
     	
@@ -426,7 +426,7 @@ species package control: fsm skills: [moving] {
     	color <- color_map[state];
     	border_color <- border_color_map[state];
     	size <- size_map[state];
-    	draw squircle(size,1.5) color: color border: border_color width: 8 rounded:true;
+    	draw squircle(size,1.5) color: color border: border_color width: 3;
     }
     
 	action deliver_ab(autonomousBike ab){
@@ -600,7 +600,6 @@ species package control: fsm skills: [moving] {
 	state unserved {
 		enter {
 			unservedCount <- unservedCount + 1;
-			write (unservedCount);
 		}
 	}
 }
@@ -1248,7 +1247,6 @@ species NetworkingAgent skills:[network] {
 			int source <- int(source_string);
 			string value_string <- replace(mes_filter_3[1],"'","");
 			int value <- int(value_string);
-			write("" + source + " " + value);
 			
  			//list m <- string(mes.contents) split_with('[, ]');
  			//int source <- int(m[0]);
