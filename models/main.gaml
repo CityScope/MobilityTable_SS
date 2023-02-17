@@ -194,7 +194,7 @@ global {
 		totalCount <- 0;
 	}
 	
-	/*reflex reset_demand when: current_date.hour = 0 and current_date.minute = 0{
+	reflex reset_demand when: current_date.hour = 0 and current_date.minute = 0 and current_date.second = 0 {
 		create package from: pdemand_csv with:
 		[start_hour::date(get("start_time")),
 				start_lat::float(get("start_latitude")),
@@ -217,7 +217,7 @@ global {
 			string start_min_str <- string(start_hour,'mm');
 			start_min <- int(start_min_str);
 		}
-	}*/
+	}
 	
 	/*reflex stop_simulation when: cycle >= numberOfDays * numberOfHours * 3600 / step {
 		timetoreload <- true;
@@ -239,20 +239,20 @@ experiment generalScenario type: gui {
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
-		display frontend  antialias: false type: java2D background: #black{ 
+		display dashboard  antialias: false type: java2D fullscreen: 0 background: #black{ 
 			graphics Strings{
 				draw "AUTONOMOUS MICRO-MOBILITY VS CARS" at: {500,90} color: #white font: font("Helvetica", 25,  #bold);
 				draw "FOR FOOD DELIVERIES" at: {1050,200} color: #white font: font("Helvetica", 25,  #bold);
 				draw rectangle(3650,2) at: {1880, 224} color: #white;
 				if !traditionalScenario {
-					draw "Future Scenario: Autonomous Micro-Mobility" at: {790,380} color: #white font: font("Helvetica", 20,  #bold);
+					draw "Future Scenario: Autonomous Micro-Mobility" at: {600,380} color: #white font: font("Helvetica", 25,  #bold);
 					draw rectangle(3000,150) at: {1880, 350} color: #white wireframe: true;
 				} else {
-					draw "Current Scenario: Cars" at: {1300,380} color: #white font: font("Helvetica", 25,  #bold);
+					draw "Current Scenario: Cars" at: {1250,380} color: #white font: font("Helvetica", 25,  #bold);
 					draw rectangle(3000,150) at: {1880, 350} color: #white wireframe: true;
 				}
 			}
-			chart "" type: histogram reverse_axes: true style: stack x_tick_values_visible: false background: #black title_font: font("Helvetica",15,#bold) color: #white y_range: [0.0,170.0] y_tick_unit: 10 memorize:false position: {100,575} size:{2500,200}{
+			chart "" type: histogram reverse_axes: true style: stack x_tick_values_visible: false background: #black title_font: font("Helvetica",15,#bold) color: #white y_range: [0.0,170.0] y_tick_unit: 10 memorize:false position: {100,550} size:{2500,200}{
 				data "" value: round(gramsCO2*100)/100 	color: diagram_color;
 				data " " value: (107.53-round(gramsCO2*100)/100) color: #darkgray ;
 				data "  " value: (top_value) color: #dimgray;
@@ -260,13 +260,31 @@ experiment generalScenario type: gui {
 			graphics Strings {
 				draw "gCO2/km traveled" at: {1050, 525} color: #white font: font("Helvetica", 15, #bold);
 				if traditionalScenario and carType = "Combustion" {
-					draw "" + round(gramsCO2*100)/100 at: {1250, 685} color: #white font: font("Helvetica", 12, #bold);
+					draw "" + round(gramsCO2*100)/100 at: {1250, 660} color: #white font: font("Helvetica", 12, #bold);
 				} else if traditionalScenario and carType = "Electric" {
-					draw "" + round(gramsCO2*100)/100 at: {750, 685} color: #white font: font("Helvetica", 12, #bold);
+					draw "" + round(gramsCO2*100)/100 at: {750, 660} color: #white font: font("Helvetica", 12, #bold);
 				} else {
-					draw "" + round(gramsCO2*100)/100 at: {275, 685} color: #black font: font("Helvetica", 12, #bold);
+					draw "" + round(gramsCO2*100)/100 at: {275, 660} color: #black font: font("Helvetica", 12, #bold);
 				}
-				draw rectangle(4000,65) at: {1880, 725} color: #black;
+				draw rectangle(4000,65) at: {1880, 700} color: #black;
+				if traditionalScenario and carType = "Combustion" {
+					draw "Combustion Cars" at: {2250, 695} color: #red font: font("Helvetica", 8, #bold);
+					draw "" + 161.97 at: {2350, 725} color: #red font: font("Helvetica", 8, #bold);			
+					draw "Electric Cars" at: {1550, 695} color: #darkgray font: font("Helvetica", 8, #bold);
+					draw "" + 107.53 at: {1600, 725} color: #darkgray font: font("Helvetica", 8, #bold);
+				} else if traditionalScenario and carType = "Electric" {
+					draw "Combustion Cars" at: {2250, 695} color: #dimgray font: font("Helvetica", 8, #bold);
+					draw "" + 161.97 at: {2350, 725} color: #dimgray font: font("Helvetica", 8, #bold);			
+					draw "Electric Cars" at: {1550, 695} color: #tomato font: font("Helvetica", 8, #bold);
+					draw "" + 107.53 at: {1600, 725} color: #tomato font: font("Helvetica", 8, #bold);
+				} else {
+					draw "Electric Cars" at: {1550, 695} color: #darkgray font: font("Helvetica", 8, #bold);
+					draw "" + 107.53 at: {1600, 725} color: #darkgray font: font("Helvetica", 8, #bold);
+					draw "Combustion Cars" at: {2250, 695} color: #dimgray font: font("Helvetica", 8, #bold);
+					draw "" + 161.97 at: {2350, 725} color: #dimgray font: font("Helvetica", 8, #bold);			
+					draw "Autonomous Micro-Mobility" at: {200, 695} color: #lime font: font("Helvetica", 8, #bold);
+					draw "" + round(gramsCO2*100)/100 at: {400, 725} color: #lime font: font("Helvetica", 8, #bold);
+				}
 			}
 			/*chart "" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 15, #bold) series_label_position: none memorize:false position: {850,600} size:{1000,550}{
 				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
@@ -340,7 +358,7 @@ experiment generalScenario type: gui {
 		}
 		
 				
-		display agentSimulation type:opengl background: #black axes: false {	 
+		display agentSimulation type:opengl background: #black fullscreen: 1 axes: false {	 
 			// species building aspect: type visible:show_building ;
 			species road aspect: base visible:show_road transparency: 0;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
