@@ -30,20 +30,6 @@ global {
 		create road from: roads_shapefile;
 		
 		roadNetwork <- as_edge_graph(road) ;
-		
-		/*loop vertex over: roadNetwork.edges {
-			create intersection {
-				//id <- roadNetwork.edges index_of vertex using topology(roadNetwork);
-				location <- point(vertex);
-			}
-		}
-		
-		loop vertex over: roadNetwork.vertices {
-			create intersection {
-				//id <- roadNetwork.edges index_of vertex using topology(roadNetwork);
-				location <- point(vertex);
-			}
-		}*/
 				
 		create restaurant from: restaurants_csv with:
 			[lat::float(get("latitude")),
@@ -69,57 +55,6 @@ global {
 			{
 				location <- to_GAMA_CRS({lon,lat},"EPSG:4326").location;
 			}
-					
-		/*if traditionalScenario{
-			numCars <- round(1*numVehiclesPackageTraditional);
-			// drop-down menu
-			if carType = "Combustion"{
-				maxFuelCar <- 500000.0 #m;
-				refillingRate <- maxFuelCar/3*60 #m/#s;
-			} else{
-				maxFuelCar <- 342000.0 #m;
-				refillingRate <- maxFuelCar/30*60 #m/#s;
-			}
-		} else if !traditionalScenario {
-			//numCars <- 0;
-			if maxBatteryLifeAutonomousBike = 35000.0{
-				coefficient <- 21;
-			} else if maxBatteryLifeAutonomousBike = 50000.0{
-				coefficient <- 30;
-			} else if maxBatteryLifeAutonomousBike = 65000.0{
-				coefficient <- 39;
-			}
-		}*/
-		
-		/*create autonomousBike number:numAutonomousBikes{					
-			location <- point(one_of(roadNetwork.vertices));
-			batteryLife <- rnd(minSafeBatteryAutonomousBike,maxBatteryLifeAutonomousBike);
-		}*/
-		
-		/*if rechargeRate = "111s"{
-			V2IChargingRate <- maxBatteryLifeAutonomousBike/(111);
-			nightRechargeCond <- false;
-			rechargeCond <- false;
-			
-		} else{
-			V2IChargingRate <- maxBatteryLifeAutonomousBike/(4.5*60*60);
-		}*/
-
-	    /*create car number:numCars{		    
-			location <- point(one_of(road));
-			fuel <- rnd(minSafeFuelCar,maxFuelCar); 	//Battery life random bewteen max and min
-		}*/
-		
-		// true false switch
-//		if isCombustionCar{
-//			maxFuelCar <- 500000.0 #m;
-//			refillingRate <- maxFuelCar/3*60 #m/#s;
-//			write(string(maxFuelCar));
-//		} else if !isCombustionCar{
-//			maxFuelCar <- 342000.0 #m;
-//			refillingRate <- maxFuelCar/30*60 #m/#s;
-//			write(string(maxFuelCar));
-//		}
 		    
 		create package from: pdemand_csv with:
 		[start_hour::date(get("start_time")),
@@ -158,10 +93,6 @@ global {
 		initial_hour <- current_date.hour;
 		initial_minute <- current_date.minute;
     }
-    
-	/*reflex stop_simulation when: cycle >= numberOfDays * numberOfHours * 3600 / step {
-		do pause ;
-	}*/
 	
 	/* corresponds with fleetsize state, new vehicles are created when the number of vehicles is increased. adds the amount needed to fulfill total amount of vehicles */
 	reflex create_autonomousBikes when: !traditionalScenario and fleetsizeCount+wanderCount+lowBattCount+getChargeCount+nightRelCount+pickUpCount+inUseCount < numAutonomousBikes{ 
@@ -194,6 +125,7 @@ global {
 		totalCount <- 0;
 	}
 	
+	// Restart the demand at the end of the day
 	reflex reset_demand when: current_date.hour = 0 and current_date.minute = 0 and current_date.second = 0 {
 		create package from: pdemand_csv with:
 		[start_hour::date(get("start_time")),
@@ -218,13 +150,6 @@ global {
 			start_min <- int(start_min_str);
 		}
 	}
-	
-	/*reflex stop_simulation when: cycle >= numberOfDays * numberOfHours * 3600 / step {
-		timetoreload <- true;
-		do pause;
-		
-	}*/
-	
 }
 
 experiment generalScenario type: gui {
@@ -362,10 +287,10 @@ experiment generalScenario type: gui {
 			// species building aspect: type visible:show_building ;
 			species road aspect: base visible:show_road transparency: 0;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
-			species chargingStation aspect: base visible:(!traditionalScenario and show_chargingStation);
+			species chargingStation aspect:base visible:(!traditionalScenario and show_chargingStation);
 			//species restaurant aspect:base visible:show_restaurant;
 			species autonomousBike aspect: realistic visible:show_autonomousBike trace:5 fading: true;
-			species car aspect: realistic visible:show_car trace:5 fading: true; 
+			species car aspect: realistic visible:show_car trace:3 fading: true; 
 			species package aspect:base visible:show_package transparency: 0;
 				
 			event["b"] {show_building<-!show_building;}

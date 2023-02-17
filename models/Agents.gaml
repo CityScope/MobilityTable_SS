@@ -226,28 +226,39 @@ species building {
 	string type; 
 }
 
-species chargingStation{
+species chargingStation control: fsm {
 	
 	list<autonomousBike> autonomousBikesToCharge;
 	
-	rgb color <- #purple;
+	rgb color;
+	
+    map<string, rgb> color_map <- [
+    	
+    	"empty":: #transparent,
+    	"in_use":: #purple
+	];
 	
 	float lat;
 	float lon;
 	int capacity;
 	
 	aspect base{
-		if self.autonomousBikesToCharge != 0 {
-			draw circle(10) color:color border:#purple;
-		} else {
-			draw circle(10) color:#transparent border:#transparent;
-		}
+		color <- color_map[state];
+		draw circle(10) color: color;
 	}
 	
 	reflex chargeBikes {
 		ask capacity first autonomousBikesToCharge {
 			batteryLife <- batteryLife + step*V2IChargingRate;
 		}
+	}
+	
+	state empty initial:true {
+		transition to: in_use when: !empty(self.autonomousBikesToCharge);
+	}
+	
+	state in_use{
+		transition to: empty when: empty(self.autonomousBikesToCharge);
 	}
 }
 
@@ -264,9 +275,15 @@ species restaurant{
 	}
 }
 
-species gasstation{
+species gasstation control: fsm{
 	
-	rgb color <- #purple;
+	rgb color;
+	
+    map<string, rgb> color_map <- [
+    	
+    	"empty":: #transparent,
+    	"in_use":: #purple
+	];
 	
 	list<car> carsToRefill;
 	float lat;
@@ -274,12 +291,22 @@ species gasstation{
 	int capacity;
 	
 	aspect base{
-		draw circle(10) color:color border:#purple;
+		color <- color_map[state];
+		draw circle(10) color: color;
 	}
+	
 	reflex refillCars {
 		ask gasStationCapacity first carsToRefill {
 			fuel <- fuel + step*refillingRate;
 		}
+	}
+	
+	state empty initial:true {
+		transition to: in_use when: !empty(self.carsToRefill);
+	}
+	
+	state in_use{
+		transition to: empty when: empty(self.carsToRefill);
 	}	
 }
 
@@ -310,8 +337,8 @@ species package control: fsm skills: [moving] {
 		"awaiting_autonomousBike":: #lime,
 		"awaiting_car":: #cyan,
 		
-		"delivering_autonomousBike":: #lime,
-		"delivering_car"::#cyan,
+		"delivering_autonomousBike":: #limegreen,
+		"delivering_car"::#dodgerblue,
 		
 		"lastmile"::#lightsteelblue,
 		
@@ -322,23 +349,48 @@ species package control: fsm skills: [moving] {
 		"unserved":: #transparent
 	];
 	
-	int size;
+	rgb border_color;
+	
+	map<string, rgb> border_color_map <- [
+    	
+    	"generated":: #transparent,
+    	
+    	"firstmile":: #transparent,
+    	
+    	"requestingDeliveryMode"::#salmon,
+    	
+		"awaiting_autonomousBike":: #transparent,
+		"awaiting_car":: #transparent,
+		
+		"delivering_autonomousBike":: #palegreen,
+		"delivering_car"::#paleturquoise,
+		
+		"lastmile"::#transparent,
+		
+		"retry":: #salmon,
+		
+		"delivered":: #transparent,
+		
+		"unserved":: #transparent
+	];
+	
+	float size;
 	
 	map<string, int> size_map <- [
     	  	
-    	"firstmile":: 10,
+    	"firstmile":: 10.0,
     	
-    	"requestingDeliveryMode":: 40,
+    	"requestingDeliveryMode":: 30,
     	
 		"awaiting_autonomousBike":: 10,
 		"awaiting_car":: 10,
 		
-		"delivering_autonomousBike":: 20,
-		"delivering_car":: 20,
+		"delivering_autonomousBike":: 30,
+		"delivering_car":: 30,
 		
 		"lastmile":: 10,
 		
-		"retry":: 40		
+		"retry":: 30		
 	];
 	
 	packageLogger logger;
@@ -372,8 +424,9 @@ species package control: fsm skills: [moving] {
             
 	aspect base {
     	color <- color_map[state];
+    	border_color <- border_color_map[state];
     	size <- size_map[state];
-    	draw square(size) color: color ;
+    	draw squircle(size,1.5) color: color border: border_color width: 8 rounded:true;
     }
     
 	action deliver_ab(autonomousBike ab){
@@ -948,16 +1001,13 @@ species car control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
-		"wandering"::#cyan,
+		"wandering"::#deepskyblue,
 		
 		"low_fuel"::#red,
-		"night_refilling"::#red,
 		"getting_fuel"::#red,
-		"getting_night_fuel"::#red,
-		"night_relocating"::#red,
 		
-		"picking_up_packages"::#cyan,
-		"in_use_packages"::#cyan
+		"picking_up_packages"::#deepskyblue,
+		"in_use_packages"::#deepskyblue
 	];
 	
 	aspect realistic {
@@ -1082,7 +1132,6 @@ species car control: fsm skills: [moving] {
 		/*transitions to different states, keeping track of the count*/
 		transition to: picking_up_packages when: delivery != nil{wanderCountCar <- wanderCountCar - 1; pickUpCountCar <- pickUpCountCar + 1;}
 		transition to: low_fuel when: setLowFuel() {wanderCountCar <- wanderCountCar - 1; lowFuelCount <- lowFuelCount + 1;}
-		/*transition to: night_refilling when: setNightRefillingTime() {nightorigin <- self.location;}*/
 		
 		if !traditionalScenario and delivery = nil{
 			wanderCountCar <- wanderCountCar - 1;
@@ -1110,22 +1159,6 @@ species car control: fsm skills: [moving] {
 			if carEventLog {ask eventLogger { do logExitState; }}
 		}
 	}
-	
-	/*state night_refilling {
-		enter{
-			target <- (gasstation closest_to(self) using topology(road)).location;
-			point target_closestPoint <- (road closest_to(target) using topology(road)).location;
-			car_distance <- host.distanceInGraph(target_closestPoint,self.location);			
-			if carEventLog {
-				ask eventLogger { do logEnterState(myself.state); }
-				ask travelLogger { do logRoads(car_distance);}
-			}
-		}
-		transition to: getting_night_fuel when: self.location = target {}
-		exit {
-			if carEventLog {ask eventLogger { do logExitState; }}
-		}
-	}*/
 	
 	state getting_fuel {
 		enter {
@@ -1156,42 +1189,6 @@ species car control: fsm skills: [moving] {
 			}
 		}
 	}
-	
-	/*state getting_night_fuel {
-		enter {
-			if gasstationFuelLogs{
-				ask eventLogger { do logEnterState("Refilling at " + (gasstation closest_to myself)); }
-				ask travelLogger { do logRoads(0.0);}
-			}		
-			target <- nil;
-			ask gasstation closest_to(self) {
-				carsToRefill <- carsToRefill + myself;
-			}
-		}
-		transition to: night_relocating when: fuel >= maxFuelCar {}
-		exit {
-			if gasstationFuelLogs{ask eventLogger { do logExitState("Refilled at " + (gasstation closest_to myself)); }}
-			ask gasstation closest_to(self) {
-				carsToRefill <- carsToRefill - myself;
-			}
-		}
-	}
-	
-	state night_relocating {
-		enter{
-			target <- nightorigin;
-			point origin_closestPoint <- (road closest_to(self.location) using topology(road)).location
-			car_distance <- host.distanceInGraph(target,origin_closestPoint);
-			if carEventLog {
-				ask eventLogger { do logEnterState(myself.state); }
-				ask travelLogger { do logRoads(car_distance);}
-			}
-		}
-		transition to: wandering when: self.location = target {}
-		exit {
-			if carEventLog {ask eventLogger { do logExitState; }}
-		}
-	}*/
 	
 	state picking_up_packages {
 		enter {

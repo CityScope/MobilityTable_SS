@@ -37,7 +37,7 @@ global {
 	bool roadsTraveledLog <- false parameter: "Roads Traveled Log" category: "Logs";
 	
 	//----------------------------------Scenarios-----------------------------
-	bool traditionalScenario <- true parameter: "Traditional Scenario" category: "Scenarios";
+	bool traditionalScenario <- false parameter: "Traditional Scenario" category: "Scenarios";
 	int numVehiclesPackageTraditional <- 35 ;
 	bool timetoreload <- false;
 	
