@@ -283,9 +283,9 @@ experiment generalScenario type: gui {
 		}
 		
 				
-		display agentSimulation type:opengl background: #black fullscreen: 1 axes: false {	 
+		display agentSimulation camera: 'from_above' camera_location: {1975.3189,1799.6678,4709.3767} camera_target: {1975.3189,1799.5856,0.0} type:opengl background: #black fullscreen: 1 axes: false {	 
 			// species building aspect: type visible:show_building ;
-			species road aspect: base visible:show_road transparency: 0;
+			species road aspect: base visible:show_road refresh: false;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
 			species chargingStation aspect:base visible:(!traditionalScenario and show_chargingStation);
 			//species restaurant aspect:base visible:show_restaurant;
