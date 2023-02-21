@@ -219,12 +219,12 @@ species road {
 	}
 }
 
-species building {
+/*species building {
     aspect type {
 		draw shape color: color_map_2[type]-75 ;
 	}
 	string type; 
-}
+}*/
 
 species chargingStation control: fsm {
 	
@@ -235,16 +235,19 @@ species chargingStation control: fsm {
     map<string, rgb> color_map <- [
     	
     	"empty":: #transparent,
-    	"in_use":: #purple
+    	"in_use":: #darkorange
 	];
 	
+	int initial_size <- 20;
+	int size;
+		
 	float lat;
 	float lon;
 	int capacity;
 	
 	aspect base{
 		color <- color_map[state];
-		draw circle(10) color: color;
+		draw circle(self.size) color: color;
 	}
 	
 	reflex chargeBikes {
@@ -255,14 +258,16 @@ species chargingStation control: fsm {
 	
 	state empty initial:true {
 		transition to: in_use when: !empty(self.autonomousBikesToCharge);
+		self.size <- initial_size;
 	}
 	
 	state in_use{
+		self.size <- initial_size + length(self.autonomousBikesToCharge)*5;
 		transition to: empty when: empty(self.autonomousBikesToCharge);
 	}
 }
 
-species restaurant{
+/*species restaurant{
 	
 	rgb color <- #sandybrown;
 	
@@ -273,7 +278,7 @@ species restaurant{
 	aspect base{
 		draw circle(10) color:color;
 	}
-}
+}*/
 
 species gasstation control: fsm{
 	
@@ -308,18 +313,6 @@ species gasstation control: fsm{
 	state in_use{
 		transition to: empty when: empty(self.carsToRefill);
 	}	
-}
-
-/*species intersection{
-	int id;
-	aspect base{
-		draw circle(10) color:#purple border:#black;
-	}
-}*/
-
-species shade control: fsm skills: [moving] {
-	
-	
 }
 
 species package control: fsm skills: [moving] {

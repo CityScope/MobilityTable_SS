@@ -22,20 +22,20 @@ global {
 	init{
     	// ---------------------------------------Buildings-----------------------------i----------------
 		do logSetUp;
-	    create building from: buildings_shapefile with: [type:string(read (usage))] {
+	    /*create building from: buildings_shapefile with: [type:string(read (usage))] {
 		 	if(type!=office and type!=residence and type!=park and type!=education){ type <- "Other"; }
-		}
+		}*/
 	    
 		// ---------------------------------------The Road Network----------------------------------------------
 		create road from: roads_shapefile;
 		
 		roadNetwork <- as_edge_graph(road) ;
 				
-		create restaurant from: restaurants_csv with:
+		/*create restaurant from: restaurants_csv with:
 			[lat::float(get("latitude")),
 			lon::float(get("longitude"))
 			]
-			{location <- to_GAMA_CRS({lon,lat},"EPSG:4326").location;}
+			{location <- to_GAMA_CRS({lon,lat},"EPSG:4326").location;}*/
 			
 		create gasstation from: gasstations_csv with:
 			[lat::float(get("lat")),
@@ -56,7 +56,7 @@ global {
 				location <- to_GAMA_CRS({lon,lat},"EPSG:4326").location;
 			}
 		    
-		create package from: pdemand_csv with:
+		/*create package from: pdemand_csv with:
 		[start_hour::date(get("start_time")),
 				start_lat::float(get("start_latitude")),
 				start_lon::float(get("start_longitude")),
@@ -77,7 +77,7 @@ global {
 			}
 			string start_min_str <- string(start_hour,'mm');
 			start_min <- int(start_min_str);
-		}
+		}*/
 		
 		// UDP connection
 		/*create NetworkingAgent number: 1 {
@@ -126,7 +126,7 @@ global {
 	}
 	
 	// Restart the demand at the end of the day
-	reflex reset_demand when: current_date.hour = 0 and current_date.minute = 0 and current_date.second = 0 {
+	reflex reset_demand when: ((current_date.hour = 0 and current_date.minute = 0 and current_date.second = 0) or cycle = 0) {
 		create package from: pdemand_csv with:
 		[start_hour::date(get("start_time")),
 				start_lat::float(get("start_latitude")),
@@ -287,11 +287,11 @@ experiment generalScenario type: gui {
 			// species building aspect: type visible:show_building ;
 			species road aspect: base visible:show_road refresh: false;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation);
-			species chargingStation aspect:base visible:(!traditionalScenario and show_chargingStation);
+			species chargingStation aspect:base visible:(!traditionalScenario and show_chargingStation) position:{0.0,0.0,0.004};
 			//species restaurant aspect:base visible:show_restaurant;
-			species autonomousBike aspect: realistic visible:show_autonomousBike trace:5 fading: true;
+			species autonomousBike aspect: realistic visible:show_autonomousBike trace:5 fading: true position:{0.0,0.0,0.001};
 			species car aspect: realistic visible:show_car trace:3 fading: true; 
-			species package aspect:base visible:show_package transparency: 0;
+			species package aspect:base visible:show_package transparency: 0 position:{0.0,0.0,0.005};
 				
 			event["b"] {show_building<-!show_building;}
 			event["r"] {show_road<-!show_road;}
