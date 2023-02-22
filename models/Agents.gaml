@@ -235,10 +235,10 @@ species chargingStation control: fsm {
     map<string, rgb> color_map <- [
     	
     	"empty":: #transparent,
-    	"in_use":: #darkorange
+    	"in_use":: #mediumpurple
 	];
 	
-	int initial_size <- 20;
+	int initial_size <- 40;
 	int size;
 		
 	float lat;
@@ -247,7 +247,7 @@ species chargingStation control: fsm {
 	
 	aspect base{
 		color <- color_map[state];
-		draw circle(self.size) color: color;
+		draw hexagon(self.size) color: color;
 	}
 	
 	reflex chargeBikes {
@@ -262,7 +262,7 @@ species chargingStation control: fsm {
 	}
 	
 	state in_use{
-		self.size <- initial_size + length(self.autonomousBikesToCharge)*5;
+		self.size <- initial_size + length(self.autonomousBikesToCharge)*10;
 		transition to: empty when: empty(self.autonomousBikesToCharge);
 	}
 }
@@ -287,7 +287,7 @@ species gasstation control: fsm{
     map<string, rgb> color_map <- [
     	
     	"empty":: #transparent,
-    	"in_use":: #purple
+    	"in_use":: #mediumpurple
 	];
 	
 	list<car> carsToRefill;
@@ -295,9 +295,12 @@ species gasstation control: fsm{
 	float lon;
 	int capacity;
 	
+	int initial_size <- 40;
+	int size;
+	
 	aspect base{
 		color <- color_map[state];
-		draw circle(10) color: color;
+		draw hexagon(self.size) color: color;
 	}
 	
 	reflex refillCars {
@@ -308,9 +311,11 @@ species gasstation control: fsm{
 	
 	state empty initial:true {
 		transition to: in_use when: !empty(self.carsToRefill);
+		self.size <- initial_size;
 	}
 	
 	state in_use{
+		self.size <- initial_size + length(self.carsToRefill)*10;
 		transition to: empty when: empty(self.carsToRefill);
 	}	
 }
@@ -587,6 +592,7 @@ species package control: fsm skills: [moving] {
 				} avgWait <- avgWait/20; //average
 				return moreThanWait;
 			}
+			do die;
 		}
 	}
 	
@@ -594,6 +600,7 @@ species package control: fsm skills: [moving] {
 		enter {
 			unservedCount <- unservedCount + 1;
 		}
+		do die;
 	}
 }
 
@@ -605,7 +612,7 @@ species autonomousBike control: fsm skills: [moving] {
 	map<string, rgb> color_map <- [
 		"fleetsize"::#transparent,
 		
-		"wandering"::#lime,
+		"wandering"::#lime-150,
 		
 		"low_battery":: #red,
 		"night_recharging":: #red,
@@ -993,7 +1000,7 @@ species car control: fsm skills: [moving] {
 	rgb color;
 	
 	map<string, rgb> color_map <- [
-		"wandering"::#deepskyblue,
+		"wandering"::#deepskyblue-50,
 		
 		"low_fuel"::#red,
 		"getting_fuel"::#red,
