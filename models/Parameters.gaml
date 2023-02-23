@@ -6,10 +6,10 @@ global {
 	//----------------------Simulation Parameters------------------------
 	
 	//Simulation time step
-	float step <- 4 #sec; 
+	float step <- 5 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 07:00:00"); 
+	date starting_date <- date("2022-10-11 05:00:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
@@ -85,6 +85,7 @@ global {
     //--------------------------CO2 graph-------------
 	rgb diagram_color;
 	float top_value;
+	rgb foodwastecolor;
     //--------------------------Demand Parameters-----------------------------
     string cityDemandFolder <- "./../includes/Demand";
     csv_file pdemand_csv <- csv_file (cityDemandFolder+ "/fooddeliverytrips_tangibletable.csv",true);

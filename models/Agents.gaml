@@ -19,6 +19,10 @@ global {
 	
 	// Initial Scenario
 	bool initial_scenario <- traditionalScenario;
+	
+	// Package count
+	int requestCount <- 0;
+	int retryCount <- 0;
 		
 	//autonomous bike count variables, used to create series graph in autonomous scenarios
 	int wanderCount <- 0;
@@ -459,6 +463,7 @@ species package control: fsm skills: [moving] {
     	transition to: requestingDeliveryMode when: timeToTravel() {
     		final_destination <- target_point;
     		totalCount <- totalCount + 1;
+    		requestCount <- requestCount + 1;
     	}
     	exit {
 			if register = 1 and (packageEventLog) {ask logger { do logExitState; }}
@@ -478,17 +483,17 @@ species package control: fsm skills: [moving] {
     		}
     	}
     	
-    	transition to: firstmile when: (choice != 0){}
-    	transition to: retry when: choice = 0  and ((current_date.hour*60 + current_date.minute) - (start_h_considered*60 + start_min_considered)) <= (maxWaitTimePackage/60) {target <- nil;}
+    	transition to: firstmile when: (choice != 0){requestCount <- requestCount - 1;}
+    	transition to: retry when: choice = 0  and ((current_date.hour*60 + current_date.minute) - (start_h_considered*60 + start_min_considered)) <= (maxWaitTimePackage/60) {target <- nil; requestCount <- requestCount - 1; retryCount <- retryCount + 1;}
     	//transition to: retry when: choice = 0 {target <- nil;}
-    	transition to: unserved when:((current_date.hour*60 + current_date.minute) - (start_h_considered*60 + start_min_considered)) > (maxWaitTimePackage/60) {target <- nil;}
+    	transition to: unserved when:((current_date.hour*60 + current_date.minute) - (start_h_considered*60 + start_min_considered)) > (maxWaitTimePackage/60) {target <- nil;requestCount <- requestCount - 1;}
     	exit {
     		if register = 1 and packageEventLog {ask logger { do logExitState; }}
 		}
     }
     
     state retry {
-    	transition to: requestingDeliveryMode when: timeToTravel() {target <- nil;}
+    	transition to: requestingDeliveryMode when: timeToTravel() {target <- nil; requestCount <- requestCount + 1; retryCount <- retryCount - 1;}
     }
 	
 	state firstmile {
