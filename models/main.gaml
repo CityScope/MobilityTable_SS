@@ -232,7 +232,7 @@ experiment generalScenario type: gui {
 				draw " " + round(reductionBEV*100)/100 + "%" at: {2230, 900} color: #white font: font("Helvetica", 20, #bold);
 			}*/
 			graphics Strings {
-				draw "Food waste" at: {3050, 775} color: #white font: font("Helvetica", 15, #bold) ;
+				draw "Unserved orders" at: {3050, 775} color: #white font: font("Helvetica", 15, #bold) ;
 				if unservedCount = 0{
 					foodwastecolor <- #palegreen;
 				} else {
@@ -240,7 +240,7 @@ experiment generalScenario type: gui {
 				}
 				draw ellipse(400,200) at: {3275, 950} color: foodwastecolor;
 				draw "" + unservedCount at: {3150,975} color: #black font:(font("Helvetica",30,#bold));
-				draw "orders wasted" at: {3025,1150} color: foodwastecolor font:(font("Helvetica",15,#bold));
+				draw "orders unserved" at: {3025,1150} color: foodwastecolor font:(font("Helvetica",15,#bold));
 				draw "_________" at: {2925,1225} color: #dimgray font:(font("Helvetica",25,#bold));
 				draw "" + totalCount at: {2925,1350} color: #dimgray font:(font("Helvetica",25,#bold));
 				draw "total orders" at: {3225,1350} color: #dimgray font:(font("Helvetica",15,#bold));

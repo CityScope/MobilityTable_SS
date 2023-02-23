@@ -348,7 +348,7 @@ species package control: fsm skills: [moving] {
 		
 		"delivered":: #transparent,
 		
-		"unserved":: #transparent
+		"unserved":: #maroon
 	];
 	
 	rgb border_color;
@@ -373,7 +373,7 @@ species package control: fsm skills: [moving] {
 		
 		"delivered":: #transparent,
 		
-		"unserved":: #transparent
+		"unserved":: #rosybrown
 	];
 	
 	int size;
@@ -392,8 +392,31 @@ species package control: fsm skills: [moving] {
 		
 		"lastmile":: 10,
 		
-		"retry":: 30		
+		"retry":: 30,
+		
+		"unserved":: 80		
 	];
+	
+	/*geometry shape;
+	
+	map<string, geometry> geometry_map <- [
+    	  	
+    	"firstmile":: squircle(10,1.5),
+    	
+    	"requestingDeliveryMode":: squircle(30,1.5),
+    	
+		"awaiting_autonomousBike":: squircle(10,1.5),
+		"awaiting_car":: squircle(10,1.5),
+		
+		"delivering_autonomousBike":: squircle(30,1.5),
+		"delivering_car":: squircle(30,1.5),
+		
+		"lastmile":: squircle(10,1.5),
+		
+		"retry":: squircle(30,1.5),
+		
+		"unserved":: cross(30,3)		
+	];*/
 	
 	packageLogger logger;
     packageLogger_trip tripLogger;
@@ -423,11 +446,14 @@ species package control: fsm skills: [moving] {
     float waitTime;
     float tripdistance;
     int choice;
+    
+    date unservedDate;
             
 	aspect base {
     	color <- color_map[state];
     	border_color <- border_color_map[state];
     	size <- size_map[state];
+    	//shape <- geometry_map[state];
     	draw squircle(size,1.5) color: color border: border_color width: 3;
     }
     
@@ -604,8 +630,11 @@ species package control: fsm skills: [moving] {
 	state unserved {
 		enter {
 			unservedCount <- unservedCount + 1;
+			unservedDate <- current_date;
 		}
-		do die;
+		if (current_date.hour*3600 + current_date.minute*60 + current_date.second - (unservedDate.hour*3600 + unservedDate.minute*60 + unservedDate.second)) >= 180 {
+			do die;
+		}
 	}
 }
 
