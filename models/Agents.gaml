@@ -242,7 +242,7 @@ species chargingStation control: fsm {
     	"in_use":: #mediumpurple
 	];
 	
-	int initial_size <- 40;
+	int initial_size <- 50;
 	int size;
 		
 	float lat;
@@ -266,7 +266,7 @@ species chargingStation control: fsm {
 	}
 	
 	state in_use{
-		self.size <- initial_size + length(self.autonomousBikesToCharge)*10;
+		self.size <- initial_size + length(self.autonomousBikesToCharge)*15;
 		transition to: empty when: empty(self.autonomousBikesToCharge);
 	}
 }
@@ -348,7 +348,7 @@ species package control: fsm skills: [moving] {
 		
 		"delivered":: #transparent,
 		
-		"unserved":: #maroon
+		"unserved":: #lightsalmon
 	];
 	
 	rgb border_color;
@@ -373,7 +373,7 @@ species package control: fsm skills: [moving] {
 		
 		"delivered":: #transparent,
 		
-		"unserved":: #rosybrown
+		"unserved":: #lightsalmon
 	];
 	
 	int size;
@@ -394,29 +394,8 @@ species package control: fsm skills: [moving] {
 		
 		"retry":: 30,
 		
-		"unserved":: 80		
+		"unserved":: 60		
 	];
-	
-	/*geometry shape;
-	
-	map<string, geometry> geometry_map <- [
-    	  	
-    	"firstmile":: squircle(10,1.5),
-    	
-    	"requestingDeliveryMode":: squircle(30,1.5),
-    	
-		"awaiting_autonomousBike":: squircle(10,1.5),
-		"awaiting_car":: squircle(10,1.5),
-		
-		"delivering_autonomousBike":: squircle(30,1.5),
-		"delivering_car":: squircle(30,1.5),
-		
-		"lastmile":: squircle(10,1.5),
-		
-		"retry":: squircle(30,1.5),
-		
-		"unserved":: cross(30,3)		
-	];*/
 	
 	packageLogger logger;
     packageLogger_trip tripLogger;
@@ -453,7 +432,6 @@ species package control: fsm skills: [moving] {
     	color <- color_map[state];
     	border_color <- border_color_map[state];
     	size <- size_map[state];
-    	//shape <- geometry_map[state];
     	draw squircle(size,1.5) color: color border: border_color width: 3;
     }
     

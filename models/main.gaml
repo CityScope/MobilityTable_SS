@@ -82,7 +82,7 @@ global {
 		// UDP connection
 		/*create NetworkingAgent number: 1 {
 		   do connect to: url protocol: "udp_server" port: port ;
-		}*/	
+		}*/
 		
 		// Arduino connection
 		create NetworkingAgent number: 1 {

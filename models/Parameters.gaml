@@ -78,7 +78,7 @@ global {
 	float refillingRate <- maxFuelCar/(3*60) #m/#s;  // average time to fill a tank is 2 minutes: https://www.api.org/oil-and-natural-gas/consumer-information/consumer-resources/staying-safe-pump#:~:text=It%20may%20be%20a%20temptation,be%20discharged%20at%20the%20nozzle.
         
     //--------------------------Package Parameters----------------------------
-    float maxWaitTimePackage <- 60 #mn parameter: "Maximum Wait Time Package (s):" category: "Package";
+    float maxWaitTimePackage <- 40 #mn parameter: "Maximum Wait Time Package (s):" category: "Package";
 	float maxDistancePackage_AutonomousBike <- maxWaitTimePackage*PickUpSpeedAutonomousBike #m;
 	float maxDistancePackage_Car <- maxWaitTimePackage*RidingSpeedCar#m;
     
