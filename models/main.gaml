@@ -232,7 +232,7 @@ experiment generalScenario type: gui {
 				draw " " + round(reductionBEV*100)/100 + "%" at: {2230, 900} color: #white font: font("Helvetica", 20, #bold);
 			}*/
 			graphics Strings {
-				draw "Unserved orders" at: {3050, 775} color: #white font: font("Helvetica", 15, #bold) ;
+				draw "Unserved orders" at: {3000, 775} color: #white font: font("Helvetica", 15, #bold) ;
 				if unservedCount = 0{
 					foodwastecolor <- #palegreen;
 				} else {
