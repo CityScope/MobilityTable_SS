@@ -64,6 +64,7 @@ global {
 			} else if !empty(availableAB) and delivery != nil{		
 				
 				// With battery life in decision
+				
 				/*list<autonomousBike> closestAB <- availableAB closest_to(delivery.initial_closestPoint,5) using topology(road);
 				autonomousBike ab <- closestAB[0];
 				lengthlist <- length(closestAB);
