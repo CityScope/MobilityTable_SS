@@ -170,9 +170,9 @@ experiment car_batch_experiment type: batch repeat: 1 until: (cycle >= numberOfD
 
 experiment autonomousbike_batch_experiment type: batch repeat: 1 until: (cycle >= numberOfDays * numberOfHours * 3600 / step) {
 	//parameter var: numAutonomousBikes among: [180];
-	parameter var: numAutonomousBikes among: [250];
+	parameter var: numAutonomousBikes among: [280];
 	//parameter var: PickUpSpeedAutonomousBike among: [11/3.6];
-	parameter var: PickUpSpeedAutonomousBike among: [14/3.6];
+	parameter var: PickUpSpeedAutonomousBike among: [8/3.6];
 	//parameter var: maxBatteryLifeAutonomousBike among: [65000.0];
 	parameter var: maxBatteryLifeAutonomousBike among: [35000.0];
 }
