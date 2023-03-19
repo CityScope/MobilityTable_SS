@@ -65,7 +65,7 @@ global {
 				
 				// With battery life in decision
 				
-				list<autonomousBike> closestAB <- availableAB closest_to(delivery.initial_closestPoint,5) using topology(road);
+				/*list<autonomousBike> closestAB <- availableAB closest_to(delivery.initial_closestPoint,5) using topology(road);
 				autonomousBike ab <- closestAB[0];
 				lengthlist <- length(closestAB);
 				
@@ -105,11 +105,11 @@ global {
 					choice <- 1;
 				} else {
 					choice <- 0;
-				}
+				}*/
 				
 				
 				// Without battery life in decision
-				/*autonomousBike b <- availableAB closest_to(delivery.initial_closestPoint) using topology(road);
+				autonomousBike b <- availableAB closest_to(delivery.initial_closestPoint) using topology(road);
 				tripDistance <- distanceInGraph(b.location,delivery.initial_closestPoint) + distanceInGraph(delivery.initial_closestPoint,delivery.final_closestPoint);
 				
 				if tripDistance < b.batteryLife {
@@ -123,7 +123,7 @@ global {
 					choice <- 1;
 				} else {
 					choice <- 0;
-				}*/
+				}
 				
 			} else {
 				choice <- 0;
@@ -519,7 +519,7 @@ species autonomousBike control: fsm skills: [moving] {
 		}
 		transition to: picking_up_packages when: delivery != nil{}
 		transition to: low_battery when: setLowBattery() {}
-		transition to: night_recharging when: setNightChargingTime() {nightorigin <- self.location;}
+		//transition to: night_recharging when: setNightChargingTime() {nightorigin <- self.location;}
 		exit {
 			if autonomousBikeEventLog {ask eventLogger { do logExitState; }}
 		}
@@ -541,7 +541,7 @@ species autonomousBike control: fsm skills: [moving] {
 		}
 	}
 	
-	state night_recharging {
+	/*state night_recharging {
 		enter{
 			target <- (chargingStation closest_to(self) using topology(road)).location; 
 			point target_closestPoint <- (road closest_to(target) using topology(road)).location;
@@ -555,7 +555,7 @@ species autonomousBike control: fsm skills: [moving] {
 		exit {
 			if autonomousBikeEventLog {ask eventLogger { do logExitState; }}
 		}
-	}
+	}*/
 	
 	state getting_charge {
 		enter {
@@ -577,7 +577,7 @@ species autonomousBike control: fsm skills: [moving] {
 		}
 	}
 	
-	state getting_night_charge {
+	/*state getting_night_charge {
 		enter {
 			if stationChargeLogs{
 				ask eventLogger { do logEnterState("Charging at " + (chargingStation closest_to myself)); }
@@ -611,7 +611,7 @@ species autonomousBike control: fsm skills: [moving] {
 		exit {
 			if autonomousBikeEventLog {ask eventLogger { do logExitState; }}
 		}
-	}
+	}*/
 	
 	state picking_up_packages {
 			enter {
