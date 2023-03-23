@@ -128,6 +128,9 @@ global {
 	// Restart the demand at the end of the day
 	reflex reset_demand when: ((current_date.hour = 0 and current_date.minute = 0 and current_date.second = 0) or cycle = 0) {
 		
+		
+		//x_min_value <- cycle;
+		//x_max_value <- x_min_value + 9360;
 		create package from: pdemand_csv with:
 		[start_hour::date(get("start_time")),
 				start_lat::float(get("start_latitude")),
@@ -154,7 +157,7 @@ global {
 	}
 }
 
-experiment generalScenario type: gui {
+experiment generalScenario type: gui keep_simulations: false{
 	int fontSize <- 5;
 	int x_val <- 100;
 	int x_step <- 300;
@@ -216,7 +219,7 @@ experiment generalScenario type: gui {
 			/*chart "" type: pie style: ring background: #black color: #white title_font: font("Helvetica", 15, #bold) series_label_position: none memorize:false position: {850,600} size:{1000,550}{
 				data "reduction %" value: round(reductionICE*100)/100 color: #lightgreen;
 				data " " value: 100-round(reductionICE*100)/100 color: #darkgray;
-			}
+//			}
 			graphics Strings {
 				draw "CO2 reduction compared" at: {920, 550} color: #white font: font("Helvetica", 15, #bold);
 				draw "to Combustion Cars" at: {1040, 630} color: #white font: font("Helvetica", 15, #bold);
@@ -229,10 +232,11 @@ experiment generalScenario type: gui {
 			graphics Strings{
 				draw "CO2 reduction compared" at: {1960, 550} color: #white font: font("Helvetica", 15, #bold);
 				draw "to Electric Cars" at: {2150, 630} color: #white font: font("Helvetica", 15, #bold);
-				draw " " + round(reductionBEV*100)/100 + "%" at: {2230, 900} color: #white font: font("Helvetica", 20, #bold);
+			
+			draw " " + round(reductionBEV*100)/100 + "%" at: {2230, 900} color: #white font: font("Helvetica", 20, #bold);
 			}*/
 			graphics Strings {
-				draw "Unserved orders" at: {3000, 775} color: #white font: font("Helvetica", 15, #bold) ;
+				draw "Unserved Orders" at: {3000, 775} color: #white font: font("Helvetica", 15, #bold) ;
 				if unservedCount = 0{
 					foodwastecolor <- #palegreen;
 				} else {
@@ -240,55 +244,55 @@ experiment generalScenario type: gui {
 				}
 				draw ellipse(400,200) at: {3275, 950} color: foodwastecolor;
 				draw "" + unservedCount at: {3150,975} color: #black font:(font("Helvetica",30,#bold));
-				draw "orders unserved" at: {3025,1150} color: foodwastecolor font:(font("Helvetica",15,#bold));
+				draw "Orders Unserved" at: {3025,1150} color: foodwastecolor font:(font("Helvetica",15,#bold));
 				draw "_________" at: {2925,1225} color: #dimgray font:(font("Helvetica",25,#bold));
 				draw "" + totalCount at: {2925,1350} color: #dimgray font:(font("Helvetica",25,#bold));
-				draw "total orders" at: {3225,1350} color: #dimgray font:(font("Helvetica",15,#bold));
+				draw "Total Orders" at: {3225,1350} color: #dimgray font:(font("Helvetica",15,#bold));
 			}
-			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 15, #bold) title_visible: false axes: #white tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour))  x_tick_unit: 750 memorize:false position: {100,1525} size:{3000,600} series_label_position: none{
+			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 15, #bold) title_visible: false axes: #white tick_line_color:#transparent x_range:9000 x_label: "" y_label: "" x_serie_labels: (string(current_date.hour))  x_tick_unit: 750 memorize:false position: {100,1525} size:{3000,600} series_label_position: none{
     			
     			data "Idling Cars" value: wanderCountCar color: #dimgray marker: false style: line ;
 				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
 				data "Recharging/Refuelling" value: getFuelCount color: #red marker: false style: line ;
-				data "Cars in use" value: inUseCountCar+pickUpCountCar color: #cyan marker: false style: line;
+				data "Cars in Use" value: inUseCountCar+pickUpCountCar color: #cyan marker: false style: line;
 				
 				data "Idling AMM" value: wanderCount+fleetsizeCount color: #dimgray marker: false style: line;	
 				//data "bikes with low battery" value: lowBattCount color: #coral marker: false style: line;
 				data "Recharging" value: getChargeCount color: #red marker: false style: line;
-				data "Autonomous micro-mobility in use" value: inUseCount+pickUpCount color: #lime marker: false style: line;
+				data "Autonomous Micro-Mobility in Use" value: inUseCount+pickUpCount color: #lime marker: false style: line;
 				//data "bikes night relocating" value: nightRelCount color: #plum marker: false style: line;
    			}
    			graphics Strings {
-				draw "Number of vehicles" rotate: 270 at: {-90, 1775} color: #white font: font("Helvetica", 10, #bold);
-				draw "Vehicle tasks" at: {1550, 1500} color: #white font: font("Helvetica", 15, #bold);
+				draw "Number of Vehicles" rotate: 270 at: {-90, 1775} color: #white font: font("Helvetica", 10, #bold);
+				draw "Vehicle Tasks" at: {1550, 1500} color: #white font: font("Helvetica", 15, #bold);
 				draw rectangle(50,10) at: {3150, 1715} color: #lime;
 				draw rectangle(50,10) at: {3150, 1775} color: #cyan;
 				draw rectangle(50,10) at: {3150, 1835} color: #dimgray;
 				draw rectangle(50,10) at: {3150, 1895} color: #red;
 				
-				draw "Micro-mobility in use" at: {3200, 1725} color: #white font: font("Helvetica", 10, #bold);
-				draw "Cars in use" at: {3200, 1785} color: #white font: font("Helvetica", 10, #bold);
-				draw "Vehicles idling" at: {3200, 1845} color: #white font: font("Helvetica", 10, #bold);
+				draw "Micro-Mobility in Use" at: {3200, 1725} color: #white font: font("Helvetica", 10, #bold);
+				draw "Cars in Use" at: {3200, 1785} color: #white font: font("Helvetica", 10, #bold);
+				draw "Vehicles Idling" at: {3200, 1845} color: #white font: font("Helvetica", 10, #bold);
 				draw "Recharging/Refilling" at: {3200, 1905} color: #white font: font("Helvetica", 10, #bold);
 				list date_time <- string(current_date) split_with (" ",true);
 				draw ("" + date_time[1]) at: {3150, 2075} color: #white font: font("Helvetica", 15, #bold);
-				draw "Time of the day" at: {1600, 2145} color: #white font: font("Helvetica", 8, #bold);
+				draw "Time of the Day" at: {1600, 2145} color: #white font: font("Helvetica", 8, #bold);
 			}
-   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 15, #bold) title_visible: false color: #white axes: #white y_range:[0,120] tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour)) x_tick_unit: 750  memorize:false position: {100,800} size:{2450,600} series_label_position: none {
+   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 15, #bold) title_visible: false color: #white axes: #white x_range: 9000 y_range:[0,120] tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour)) x_tick_unit: 750  memorize:false position: {100,800} size:{2450,600} series_label_position: none {
 				data "Wait Time" value: avgWait color: #pink marker: false style: line;
 				data "40 min" value: 40 color: #red marker: false style: line;
 			}
 			graphics Strings {
-				draw "Moving average wait time [min]" rotate: 270 at: {-220, 1075} color: #white font: font("Helvetica", 10, #bold);
-				draw "Wait time" at: {1350, 775} color: #white font: font("Helvetica", 15, #bold);
+				draw "Moving Average Wait Time [min]" rotate: 270 at: {-220, 1075} color: #white font: font("Helvetica", 10, #bold);
+				draw "Wait Time" at: {1350, 775} color: #white font: font("Helvetica", 15, #bold);
 				draw rectangle(50,10) at: {350, 825} color: #red;
 				draw rectangle(50,10) at: {350, 875} color: #pink;
 				
-				draw "40 minutes" at: {400, 835} color: #white font: font("Helvetica", 10, #bold);
-				draw "Wait time" at: {400, 885} color: #white font: font("Helvetica", 10, #bold);
+				draw "40 Minutes" at: {400, 835} color: #white font: font("Helvetica", 10, #bold);
+				draw "Wait Time" at: {400, 885} color: #white font: font("Helvetica", 10, #bold);
 				list date_time <- string(current_date) split_with (" ",true);
 				draw ("" + date_time[1]) at: {2550, 1355} color: #white font: font("Helvetica", 10, #bold);
-				draw "Time of the day" at: {1350, 1425} color: #white font: font("Helvetica", 8, #bold);
+				draw "Time of the Day" at: {1350, 1425} color: #white font: font("Helvetica", 8, #bold);
 			}
 		}
 		
@@ -325,15 +329,15 @@ experiment generalScenario type: gui {
 				draw triangle(40) at: {x_val+x_step*4+15, y_val + y_step*2.5 - 20} color: #cyan-150 rotate: 90;
 				draw triangle(40) at: {x_val+x_step*4+30, y_val + y_step*2.5 - 20} color: #cyan-100 rotate: 90;		
 				draw triangle(40) at: {x_val+x_step*4+15, y_val + y_step*3.5 - 20} color: #red rotate: 90;
-				draw " = Micro-mobility" at: {x_val+x_step*4 + 80, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Micro-Mobility" at: {x_val+x_step*4 + 80, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
 				draw " = Cars" at: {x_val+x_step*4 + 80, y_val + y_step*2.5} color: #white font: font("Helvetica", fontSize+2, #bold);
-				draw " = Vehicles charging" at: {x_val+x_step*4 + 80, y_val + y_step*3.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Vehicles Charging" at: {x_val+x_step*4 + 80, y_val + y_step*3.5} color: #white font: font("Helvetica", fontSize+2, #bold);
 				draw squircle(40,1.5) at: {x_val+x_step*7-50, y_val + y_step*1.5 - 20} color: #limegreen border: #palegreen width: 3;
 				draw squircle(40,1.5) at: {x_val+x_step*7-50, y_val + y_step*2.5 - 20} color: #dodgerblue border: #paleturquoise width: 3;
 				draw squircle(40,1.5) at: {x_val+x_step*7-50, y_val + y_step*3.5 - 20} color: #red border: #salmon width: 3;
-				draw " = Food delivery by AMM" at: {x_val+x_step*7, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
-				draw " = Food delyvery by car" at: {x_val+x_step*7, y_val + y_step*2.5} color: #white font: font("Helvetica", fontSize+2, #bold);
-				draw " = Food waiting" at: {x_val+x_step*7, y_val + y_step*3.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Food Delivery by AMM" at: {x_val+x_step*7, y_val + y_step*1.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Food Delivery by Car" at: {x_val+x_step*7, y_val + y_step*2.5} color: #white font: font("Helvetica", fontSize+2, #bold);
+				draw " = Food Waiting" at: {x_val+x_step*7, y_val + y_step*3.5} color: #white font: font("Helvetica", fontSize+2, #bold);
 				//draw circle(20)at: {x_val+x_step*10, y_val + y_step - 20} color: #yellow;
 				draw hexagon(40)at: {x_val+x_step*10, y_val + y_step*1.5 - 20} color: #mediumpurple;
 				//draw " = Restaurants" at: {x_val+x_step*10 + 50, y_val + y_step} color: #white font: font("Helvetica", fontSize, #bold);

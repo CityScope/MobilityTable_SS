@@ -581,7 +581,10 @@ species package control: fsm skills: [moving] {
 				timeWaiting <- float(current_date.hour*60 + current_date.minute) - (initial_hour*60 + initial_minute);
 			} else if (start_h = initial_hour) and (start_min < initial_minute){
 				timeWaiting <- float(current_date.hour*60 + current_date.minute) - (initial_hour*60 + initial_minute);
-			} else {
+			} else if start_h > current_date.hour {
+				timeWaiting <- float(current_date.hour*60 + current_date.minute) + (24*60 - (start_h*60 + start_min));		
+			}	
+			else {
 				timeWaiting <- float(current_date.hour*60 + current_date.minute) - (start_h*60 + start_min);
 			}
 			

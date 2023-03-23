@@ -9,7 +9,7 @@ global {
 	float step <- 5 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 09:00:00"); 
+	date starting_date <- date("2022-10-11 09:01:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
@@ -37,7 +37,7 @@ global {
 	bool roadsTraveledLog <- false parameter: "Roads Traveled Log" category: "Logs";
 	
 	//----------------------------------Scenarios-----------------------------
-	bool traditionalScenario <- false parameter: "Traditional Scenario" category: "Scenarios";
+	bool traditionalScenario <- true parameter: "Traditional Scenario" category: "Scenarios";
 	int numVehiclesPackageTraditional <- 35 ;
 	bool timetoreload <- false;
 	
@@ -86,6 +86,9 @@ global {
 	rgb diagram_color;
 	float top_value;
 	rgb foodwastecolor;
+	
+	int x_min_value <- 0;
+	int x_max_value <- 18720;
     //--------------------------Demand Parameters-----------------------------
     string cityDemandFolder <- "./../includes/Demand";
     csv_file pdemand_csv <- csv_file (cityDemandFolder+ "/fooddeliverytrips_tangibletable.csv",true);
