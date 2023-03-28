@@ -582,9 +582,9 @@ species package control: fsm skills: [moving] {
 			} else if (start_h = initial_hour) and (start_min < initial_minute){
 				timeWaiting <- float(current_date.hour*60 + current_date.minute) - (initial_hour*60 + initial_minute);
 			} else if start_h > current_date.hour {
-				timeWaiting <- float(current_date.hour*60 + current_date.minute) + (24*60 - (start_h*60 + start_min));		
-			}	
-			else {
+				timeWaiting <- float(current_date.hour*60 + current_date.minute) + (24*60 - (start_h*60 + start_min));
+				//write(timeWaiting);		
+			} else {
 				timeWaiting <- float(current_date.hour*60 + current_date.minute) - (start_h*60 + start_min);
 			}
 			
@@ -598,14 +598,14 @@ species package control: fsm skills: [moving] {
 				/* the loop below is to count the number of packages delivered under/over 40 minutes, represented in a pie chart (inactive) */
 				loop i over: timeList{
 					if i > 40{
-						moreThanWait <- moreThanWait+1;
+						moreThanWait <- moreThanWait + 1;
 					} 
 					avgWait <- avgWait + i;
 				} avgWait <- avgWait/20; //average
 				return moreThanWait;
 			}
-			do die;
 		}
+		do die;
 	}
 	
 	state unserved {

@@ -14,6 +14,11 @@ global {
 	graph roadNetwork;
 	list<int> chargingStationLocation;
 	
+	/*int nb_autonomousVehicles -> {length(autonomousBike)};
+	int nb_cars -> {length(car)};
+	int nb_packages -> {length(package)};*/
+	
+	
 	// UDP connection
 	/*int port <- 9877;
 	string url <- "localhost";*/	
@@ -128,7 +133,6 @@ global {
 	// Restart the demand at the end of the day
 	reflex reset_demand when: ((current_date.hour = 0 and current_date.minute = 0 and current_date.second = 0) or cycle = 0) {
 		
-		
 		//x_min_value <- cycle;
 		//x_max_value <- x_min_value + 9360;
 		create package from: pdemand_csv with:
@@ -153,11 +157,11 @@ global {
 			string start_min_str <- string(start_hour,'mm');
 			start_min <- int(start_min_str);
 		}
-		
+		totalCount <- 0;
 	}
 }
 
-experiment generalScenario type: gui keep_simulations: false{
+experiment generalScenario type: gui benchmark: false keep_simulations: false {
 	int fontSize <- 5;
 	int x_val <- 100;
 	int x_step <- 300;
@@ -165,6 +169,7 @@ experiment generalScenario type: gui keep_simulations: false{
 	int y_step <- 150;
 		
 	float minimum_cycle_duration <- 0.065 #s;
+	
 
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
@@ -380,7 +385,10 @@ experiment generalScenario type: gui keep_simulations: false{
 					draw ""+round(PickUpSpeedAutonomousBike*100*3.6)/100 at: {x_val+x_step*3,y_val+y_step*3} color: #white font: font("Helvetica", fontSize);	
 				}
 			}
-		}    	
+		}
+		/*monitor "Number of autonomous vehicles" value: nb_autonomousVehicles;
+		monitor "Number of cars" value: nb_cars;
+		monitor "Number of packages" value: nb_packages;*/		    	
     }	
 }
 
