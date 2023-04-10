@@ -312,14 +312,14 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
 			species car aspect: realistic visible:show_car trace:3 fading: true position:{0.0,0.0,0.001}; 
 			species package aspect:base visible:show_package transparency: 0 position:{0.0,0.0,0.005};
 				
-			event["b"] {show_building<-!show_building;}
-			event["r"] {show_road<-!show_road;}
-			event["s"] {show_chargingStation<-!show_chargingStation;}
-			event["s"] {show_gasStation<-!show_gasStation;}
-			event["f"] {show_restaurant<-!show_restaurant;}
-			event["d"] {show_package<-!show_package;}
-			event["a"] {show_autonomousBike<-!show_autonomousBike;}
-			event["c"] {show_car<-!show_car;}
+			event "b" {show_building<-!show_building;}
+			event "r" {show_road<-!show_road;}
+			event "s" {show_chargingStation<-!show_chargingStation;}
+			event "s" {show_gasStation<-!show_gasStation;}
+			event "f" {show_restaurant<-!show_restaurant;}
+			event "d" {show_package<-!show_package;}
+			event "a" {show_autonomousBike<-!show_autonomousBike;}
+			event "c" {show_car<-!show_car;}
 	
 			graphics Strings {
 				if maxBatteryLifeAutonomousBike = 65000.0{
