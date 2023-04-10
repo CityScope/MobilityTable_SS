@@ -130,12 +130,12 @@ experiment traditionalScenario {
 			species autonomousBike aspect: realistic visible:show_autonomousBike trace:30 fading: true;
 			species package aspect:base visible:show_package;
 			
-		event["b"] {show_building<-!show_building;}
-		event["r"] {show_road<-!show_road;}
-		event["s"] {show_gasStation<-!show_gasStation;}
-		event["f"] {show_restaurant<-!show_restaurant;}
-		event["d"] {show_package<-!show_package;}
-		event["c"] {show_car<-!show_car;}
+		event "b" {show_building<-!show_building;}
+		event "r" {show_road<-!show_road;}
+		event "s" {show_gasStation<-!show_gasStation;}
+		event "f" {show_restaurant<-!show_restaurant;}
+		event "d" {show_package<-!show_package;}
+		event "c" {show_car<-!show_car;}
 		}
 	}
 }
@@ -154,12 +154,12 @@ experiment autonomousScenario type: gui {
 			species car aspect: realistic visible:show_car trace:15 fading: true; 
 			species package aspect:base visible:show_package;
 			//species intersection aspect:base;
-		event["b"] {show_building<-!show_building;}
-		event["r"] {show_road<-!show_road;}
-		event["s"] {show_chargingStation<-!show_chargingStation;}
-		event["f"] {show_restaurant<-!show_restaurant;}
-		event["d"] {show_package<-!show_package;}
-		event["a"] {show_autonomousBike<-!show_autonomousBike;}
+		event "b" {show_building<-!show_building;}
+		event "r" {show_road<-!show_road;}
+		event "s" {show_chargingStation<-!show_chargingStation;}
+		event "f" {show_restaurant<-!show_restaurant;}
+		event "d" {show_package<-!show_package;}
+		event "a" {show_autonomousBike<-!show_autonomousBike;}
 		}
     }
 }
