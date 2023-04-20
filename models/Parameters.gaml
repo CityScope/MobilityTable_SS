@@ -13,7 +13,7 @@ global {
 	
 	//Date for log files
 	//date logDate <- #now;
-	date logDate <- date("2023-03-19 18:00:00");
+	date logDate <- date("2023-04-20 12:10:00");
 	
 	date nowDate <- #now;
 	
@@ -37,7 +37,7 @@ global {
 	bool roadsTraveledLog <- true parameter: "Roads Traveled Log" category: "Logs";
 	
 	//----------------------------------Scenarios-----------------------------
-	bool traditionalScenario <- false parameter: "Traditional Scenario" category: "Scenarios";
+	bool traditionalScenario <- true parameter: "Traditional Scenario" category: "Scenarios";
 	int numVehiclesPackageTraditional <- 100 min:1 max:1000 parameter: "Number or Vehicles for Package Delivery in Traditional Scenario" category:"Initial";
 	
 	//----------------------Autonomous Scenario-------------------------
@@ -61,7 +61,7 @@ global {
 	// Data extracted from: https://movotiv.com/statistics
 	float RidingSpeedCar<-  30/3.6 #m/#s min: 1/3.6 #m/#s max: 50/3.6 #m/#s parameter: "Car Riding Speed (m/s):" category:  "Car";
 	// Data extracted from: https://www.autoinsuresavings.org/far-drive-vehicle-empty/
-	float minSafeFuelCar <- 1*maxFuelCar/16 #m; 
+	float minSafeFuelCar <- 0.15*maxFuelCar #m; 
 	float nightSafeFuelCar <- 0.9*maxFuelCar #m; 
 	// Data extracted from: Good to Go - Assessing the Environmental Performance of New Mobility || Can Autonomy Make Bicycle-Sharing Systems More Sustainable - Environmental Impact Analysis of an Emerging Mobility Technology
 	float refillingRate <- maxFuelCar/(30*60) #m/#s;  // average time to fill a tank is 2 minutes: https://www.api.org/oil-and-natural-gas/consumer-information/consumer-resources/staying-safe-pump#:~:text=It%20may%20be%20a%20temptation,be%20discharged%20at%20the%20nozzle.
