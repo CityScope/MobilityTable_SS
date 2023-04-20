@@ -25,14 +25,14 @@ global {
 	bool loggingEnabled <- true parameter: "Logging" category: "Logs";
 	bool printsEnabled <- false parameter: "Printing" category: "Logs";
 	
-	bool autonomousBikeEventLog <- true parameter: "Autonomous Bike Event/Trip Log" category: "Logs";
-	bool carEventLog <- false parameter: "Car Event/Trip Log" category: "Logs";
+	bool autonomousBikeEventLog <- false parameter: "Autonomous Bike Event/Trip Log" category: "Logs";
+	bool carEventLog <- true parameter: "Car Event/Trip Log" category: "Logs";
 	
 	bool packageTripLog <- true parameter: "Package Trip Log" category: "Logs";
 	bool packageEventLog <- true parameter: "Package Event Log" category: "Logs";
 		
-	bool stationChargeLogs <- true parameter: "Station Charge Log" category: "Logs";
-	bool gasstationFuelLogs <- false parameter: "Gas Station Charge Log" category: "Logs";
+	bool stationChargeLogs <- false parameter: "Station Charge Log" category: "Logs";
+	bool gasstationFuelLogs <- true parameter: "Gas Station Charge Log" category: "Logs";
 	
 	bool roadsTraveledLog <- true parameter: "Roads Traveled Log" category: "Logs";
 	
