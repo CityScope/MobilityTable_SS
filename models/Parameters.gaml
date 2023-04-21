@@ -13,7 +13,7 @@ global {
 	
 	//Date for log files
 	//date logDate <- #now;
-	date logDate <- date("2023-04-20 12:10:00");
+	date logDate <- date("2023-04-20 15:45:00");
 	
 	date nowDate <- #now;
 	
@@ -56,15 +56,17 @@ global {
 	
 	//----------------------Traditional Scenario-------------------------
 	//------------------------Car Parameters------------------------------
-	// Data extracted from: https://www.thecoldwire.com/how-many-miles-does-a-full-tank-of-gas-last/
-	float maxFuelCar <- 342000.0 #m	min: 320000.0#m max: 645000.0#m parameter: "Car Battery Capacity (m):" category: "Car";
+	// 500km for Combustion Cars from: https://www.blog.ontariocars.ca/vehicles-with-long-range-on-one-tank-on-fuel/
+	float maxFuelCar <- 500000.0 #m	min: 320000.0#m max: 645000.0#m parameter: "Car Battery Capacity (m):" category: "Car";
 	// Data extracted from: https://movotiv.com/statistics
 	float RidingSpeedCar<-  30/3.6 #m/#s min: 1/3.6 #m/#s max: 50/3.6 #m/#s parameter: "Car Riding Speed (m/s):" category:  "Car";
 	// Data extracted from: https://www.autoinsuresavings.org/far-drive-vehicle-empty/
 	float minSafeFuelCar <- 0.15*maxFuelCar #m; 
 	float nightSafeFuelCar <- 0.9*maxFuelCar #m; 
 	// Data extracted from: Good to Go - Assessing the Environmental Performance of New Mobility || Can Autonomy Make Bicycle-Sharing Systems More Sustainable - Environmental Impact Analysis of an Emerging Mobility Technology
-	float refillingRate <- maxFuelCar/(30*60) #m/#s;  // average time to fill a tank is 2 minutes: https://www.api.org/oil-and-natural-gas/consumer-information/consumer-resources/staying-safe-pump#:~:text=It%20may%20be%20a%20temptation,be%20discharged%20at%20the%20nozzle.
+	// Refueling/recharging rate
+	// 3 minutes for Combustion Cars: https://www.researchgate.net/publication/311210193_Fuel_cells_vs_Batteries_in_the_Automotive_Sector
+	float refillingRate <- maxFuelCar/(3*60) #m/#s;  
     
     //--------------------------Package Parameters----------------------------
     float maxWaitTimePackage <- 1440 #mn		min: 3#mn max: 1440#mn parameter: "Max Wait Time Package:" category: "Package";
