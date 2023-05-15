@@ -1,0 +1,336 @@
+NAutonomousBikes: 50
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 50
+Max Battery Life of Bikes [km]: 35.0
+Pick-up speed [km/h]: 5.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 2.16
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 50
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 50
+Max Battery Life of Bikes [km]: 65.0
+Pick-up speed [km/h]: 5.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 4.01
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 50
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 50
+Max Battery Life of Bikes [km]: 35.0
+Pick-up speed [km/h]: 20.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 2.16
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 50
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 50
+Max Battery Life of Bikes [km]: 65.0
+Pick-up speed [km/h]: 20.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 4.01
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 300
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 300
+Max Battery Life of Bikes [km]: 35.0
+Pick-up speed [km/h]: 5.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 2.16
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 300
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 300
+Max Battery Life of Bikes [km]: 65.0
+Pick-up speed [km/h]: 5.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 4.01
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 300
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 300
+Max Battery Life of Bikes [km]: 35.0
+Pick-up speed [km/h]: 20.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 2.16
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true
+NAutonomousBikes: 300
+NCars: 40
+MaxWaitPackage: 60.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 10.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 300
+Max Battery Life of Bikes [km]: 65.0
+Pick-up speed [km/h]: 20.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 40
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 6.25
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 60.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 4.01
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Tangible_Table
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: true
+Car Event/Trip Log: false
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: true
+Gas Station Charge Log: false
+Roads Traveled Log: true

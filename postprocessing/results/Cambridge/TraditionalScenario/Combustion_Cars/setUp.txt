@@ -1,0 +1,672 @@
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
+NAutonomousBikes: 200
+NCars: 0
+MaxWaitPackage: 1440.0
+------------------------------SIMULATION PARAMETERS------------------------------
+Step: 2.0
+Starting Date: 2022-10-11 00:00:00
+Number of Days of Simulation: 1
+Number ot Hours of Simulation (if less than one day): 24
+------------------------------BIKE PARAMETERS------------------------------
+Number of Bikes: 200
+Max Battery Life of Bikes [km]: 50.0
+Pick-up speed [km/h]: 8.0
+Minimum Battery [%]: 25.0
+------------------------------CAR PARAMETERS------------------------------
+Number of Cars: 0
+Max Battery Life of Cars [km]: 500.0
+Minimum Battery Cars [%]: 15.0
+Riding speed Cars [km/h]: 30.000000000000004
+------------------------------PACKAGE PARAMETERS------------------------------
+Maximum Wait Time Package [min]: 1440.0
+------------------------------STATION PARAMETERS------------------------------
+Number of Charging Stations: 75
+V2I Charging Rate: 3.09
+---------------------------GAS STATION PARAMETERS------------------------------
+Number of Gas Stations: 0
+Refilling Rate: 2777.78
+Gas Station Capacity: 0
+------------------------------MAP PARAMETERS------------------------------
+City Map Name: Cambridge
+Redisence: R
+Office: O
+Usage: usage
+Color Map: map(['R'::rgb (245, 229, 203, 255),'O'::#gray,'P'::#lightgreen,'E'::#lightblue,'Other'::#black])
+------------------------------LOGGING PARAMETERS------------------------------
+Print Enabled: false
+Autonomous Bike Event/Trip Log: false
+Car Event/Trip Log: true
+Package Trip Log: true
+Package Event Log:true
+Station Charge Log: false
+Gas Station Charge Log: true
+Roads Traveled Log: true
