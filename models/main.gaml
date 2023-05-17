@@ -21,7 +21,8 @@ global {
 	
 	// UDP connection
 	/*int port <- 9877;
-	string url <- "localhost";*/	
+	string url <- "localhost";*/
+	bool useArduino<-false;	
 	
     // ---------------------------------------Agent Creation----------------------------------------------
 	init{
@@ -90,9 +91,12 @@ global {
 		}*/
 		
 		// Arduino connection
-		create NetworkingAgent number: 1 {
-		   do connect protocol: "arduino" to:"COM3";
+		if(useArduino){
+			create NetworkingAgent number: 1 {
+		   		do connect protocol: "arduino" to:"COM3";
+			}
 		}
+		
 		
 		write "FINISH INITIALIZATION";
 		initial_hour <- current_date.hour;
@@ -163,7 +167,7 @@ global {
 	}
 }
 
-experiment generalScenario type: gui benchmark: false keep_simulations: false {
+experiment generalScenario type: gui benchmark: false {//keep_simulations: false {
 	int fontSize <- 5;
 	int x_val <- 100;
 	int x_step <- 300;
@@ -176,7 +180,7 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
-		display dashboard  antialias: false type: java2D fullscreen: 0 background: #black{ 
+		display dashboard  antialias: false type: java2D fullscreen: false background: #black{ 
 			graphics Strings{
 				draw "AUTONOMOUS MICRO-MOBILITY FOR FOOD DELIVERIES" at: {200,125} color: #white font: font("Helvetica", 23,  #bold);
 				//draw "FOR FOOD DELIVERIES" at: {1050,200} color: #white font: font("Helvetica", 25,  #bold);
@@ -314,14 +318,14 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
 			species car aspect: realistic visible:show_car trace:3 fading: true position:{0.0,0.0,0.001}; 
 			species package aspect:base visible:show_package transparency: 0 position:{0.0,0.0,0.005};
 				
-			event["b"] {show_building<-!show_building;}
-			event["r"] {show_road<-!show_road;}
-			event["s"] {show_chargingStation<-!show_chargingStation;}
-			event["s"] {show_gasStation<-!show_gasStation;}
-			event["f"] {show_restaurant<-!show_restaurant;}
-			event["d"] {show_package<-!show_package;}
-			event["a"] {show_autonomousBike<-!show_autonomousBike;}
-			event["c"] {show_car<-!show_car;}
+			event "b" {show_building<-!show_building;}
+			event "r" {show_road<-!show_road;}
+			event "s" {show_chargingStation<-!show_chargingStation;}
+			event "s" {show_gasStation<-!show_gasStation;}
+			event "f" {show_restaurant<-!show_restaurant;}
+			event "d" {show_package<-!show_package;}
+			event "a" {show_autonomousBike<-!show_autonomousBike;}
+			event "c" {show_car<-!show_car;}
 	
 			graphics Strings {
 				if maxBatteryLifeAutonomousBike = 65000.0{
