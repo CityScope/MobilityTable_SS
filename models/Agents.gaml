@@ -1255,7 +1255,7 @@ species NetworkingAgent skills:[network] {
 		
 		loop while:has_more_message(){
 			message mes <- fetch_message();	
-			list   <- string(mes.contents) split_with('[,]');
+			list  mes_filter_1 <- string(mes.contents) split_with('[,]');
 			list mes_filter_2 <- string(mes_filter_1[1]) split_with('[,]');
 			list mes_filter_3 <- string(mes_filter_2) split_with('[:]');
 			string source_string <- replace(mes_filter_3[0],"'","");
