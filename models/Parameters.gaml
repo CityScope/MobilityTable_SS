@@ -6,10 +6,10 @@ global {
 	//----------------------Simulation Parameters------------------------
 	
 	//Simulation time step
-	float step <- 60 #sec; 
+	float step <- 5 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 00:00:00"); 
+	date starting_date <- date("2022-10-11 07:00:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
@@ -37,13 +37,13 @@ global {
 	bool roadsTraveledLog <- false parameter: "Roads Traveled Log" category: "Logs";
 	
 	//----------------------------------Scenarios-----------------------------
-	bool traditionalScenario <- false parameter: "Traditional Scenario" category: "Scenarios";
+	bool traditionalScenario <- true parameter: "Traditional Scenario" category: "Scenarios";
 	int numVehiclesPackageTraditional <- 35 ;
 	bool timetoreload <- false;
 	
 	//----------------------Autonomous Scenario-------------------------
 	//-----------------Autonomous Bike Parameters-----------------------
-	int numAutonomousBikes <- 200 min: 50 max: 300 parameter: "Number of Autonomous Bicycles:" category: "Autonomous Bicycle";
+	int numAutonomousBikes <- 60 min: 50 max: 300 parameter: "Number of Autonomous Bicycles:" category: "Autonomous Bicycle";
 	float PickUpSpeedAutonomousBike <-  6/3.6 #m/#s min: 5/3.6 #m/#s max: 20/3.6 #m/#s parameter: "Bike Speed (m/s):" category:  "Autonomous Bicycle";
 	float RidingSpeedAutonomousBike <-  PickUpSpeedAutonomousBike;
 	float maxBatteryLifeAutonomousBike <- 35000.0 #m	min: 35000#m max: 65000#m step: 30000 parameter: "Battery Capacity (m):" category: "Autonomous Bicycle"; //battery capacity in m

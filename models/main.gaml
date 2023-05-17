@@ -158,6 +158,8 @@ global {
 			start_min <- int(start_min_str);
 		}
 		totalCount <- 0;
+		initial_hour <- 0;
+		initial_minute <- 0;
 	}
 }
 
@@ -254,7 +256,7 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
 				draw "" + totalCount at: {2925,1350} color: #dimgray font:(font("Helvetica",25,#bold));
 				draw "Total Orders" at: {3225,1350} color: #dimgray font:(font("Helvetica",15,#bold));
 			}
-			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 15, #bold) title_visible: false axes: #white tick_line_color:#transparent x_range:9000 x_label: "" y_label: "" x_serie_labels: (string(current_date.hour))  x_tick_unit: 750 memorize:false position: {100,1525} size:{3000,600} series_label_position: none{
+			chart "Vehicle Tasks" type: series  background: #black color: #white title_font: font("Helvetica", 15, #bold) title_visible: false axes: #white tick_line_color:#transparent x_range:8652 x_label: "" y_label: "" x_serie_labels: (string(current_date.hour))  x_tick_unit: 721 memorize:false position: {100,1525} size:{3000,600} series_label_position: none{
     			
     			data "Idling Cars" value: wanderCountCar color: #dimgray marker: false style: line ;
 				//data "cars low battery/fuel" value: lowFuelCount color: #orange marker: false style: line;
@@ -283,7 +285,7 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
 				draw ("" + date_time[1]) at: {3150, 2075} color: #white font: font("Helvetica", 15, #bold);
 				draw "Time of the Day" at: {1600, 2145} color: #white font: font("Helvetica", 8, #bold);
 			}
-   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 15, #bold) title_visible: false color: #white axes: #white x_range: 9000 y_range:[0,120] tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour)) x_tick_unit: 750  memorize:false position: {100,800} size:{2450,600} series_label_position: none {
+   			chart "Average Wait Time" type: series background: #black title_font: font("Helvetica", 15, #bold) title_visible: false color: #white axes: #white x_range: 8652 y_range:[0,120] tick_line_color:#transparent x_label: "" y_label: "" x_serie_labels: (string(current_date.hour)) x_tick_unit: 721  memorize:false position: {100,800} size:{2450,600} series_label_position: none {
 				data "Wait Time" value: avgWait color: #pink marker: false style: line;
 				data "40 min" value: 40 color: #red marker: false style: line;
 			}
