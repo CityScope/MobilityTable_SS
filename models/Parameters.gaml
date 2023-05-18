@@ -6,7 +6,7 @@ global {
 	//----------------------Simulation Parameters------------------------
 	
 	//Simulation time step
-	float step <- 5 #sec; 
+	float step <- 60 #sec; 
 	
 	//Simulation starting date
 	date starting_date <- date("2022-10-11 07:00:00"); 

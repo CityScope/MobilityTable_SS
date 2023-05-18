@@ -180,7 +180,7 @@ experiment generalScenario type: gui benchmark: false {//keep_simulations: false
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
-		display dashboard  antialias: false type: java2D fullscreen: false background: #black{ 
+		display dashboard  antialias: false type: java2D fullscreen: 0 background: #black{ 
 			graphics Strings{
 				draw "AUTONOMOUS MICRO-MOBILITY FOR FOOD DELIVERIES" at: {200,125} color: #white font: font("Helvetica", 23,  #bold);
 				//draw "FOR FOOD DELIVERIES" at: {1050,200} color: #white font: font("Helvetica", 25,  #bold);
