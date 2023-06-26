@@ -26,7 +26,7 @@ global {
 	// UDP connection
 	/*int port <- 9877;
 	string url <- "localhost";*/
-	bool useArduino<-false;	
+	bool useArduino<- true;	
 	
     // ---------------------------------------Agent Creation----------------------------------------------
 	init{
@@ -218,7 +218,7 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
     output {
 	    layout  #split background: #black consoles: false controls: false editors: false navigator: false parameters: false toolbars: false tray: false tabs: true;
 		
-		display dashboard  antialias: false type: java2D background: #black{ 
+		display dashboard  antialias: false type: java2D fullscreen:0 background: #black{ 
 			graphics Strings{
 				draw "AUTONOMOUS MICRO-MOBILITY FOR FOOD DELIVERIES" at: {200,125} color: #white font: font("Helvetica", 23,  #bold);
 				//draw "FOR FOOD DELIVERIES" at: {1050,200} color: #white font: font("Helvetica", 25,  #bold);
@@ -346,7 +346,7 @@ experiment generalScenario type: gui benchmark: false keep_simulations: false {
 		}
 		
 				
-		display agentSimulation camera: 'from_above' camera_location: {1975.3189,1799.6678,4709.3767} camera_target: {1975.3189,1799.5856,0.0} type:opengl background: #black  axes: false {	 
+		display agentSimulation camera: 'from_above' fullscreen:1 camera_location: {1975.3189,1799.6678,4709.3767} camera_target: {1975.3189,1799.5856,0.0} type:opengl background: #black  axes: false {	 
 			// species building aspect: type visible:show_building ;
 			species road aspect: base visible:show_road refresh: false;
 			species gasstation aspect:base visible:(traditionalScenario and show_gasStation) position:{0.0,0.0,0.004};

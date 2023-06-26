@@ -26,6 +26,8 @@ if False:
 if True:
     def restart_gama():
 
+        print('Hello')
+
         #Avoid backlash command with r
         #window_title= r'test - C:\Users\City Science\Documents\GitHub\FoodDeliveries\models\TestPlot.gaml'
         window_title= r'generalScenario - C:\Users\City Science\Documents\GitHub\FoodDeliveries\models\main.gaml'
@@ -44,7 +46,7 @@ if True:
         time.sleep(5)  # Wait for GAMA to restart (adjust if needed)
 
     # Schedule the restart every hour
-    schedule.every(30).minute.do(restart_gama)
+    schedule.every(30).minutes.do(restart_gama)
 
     while True:
         schedule.run_pending()
