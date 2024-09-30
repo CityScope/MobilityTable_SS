@@ -26,7 +26,7 @@ global {
 	// UDP connection
 	/*int port <- 9877;
 	string url <- "localhost";*/
-	bool useArduino<- true;	
+	bool useArduino<- false;	
 	
     // ---------------------------------------Agent Creation----------------------------------------------
 	init{
