@@ -6,14 +6,14 @@ global {
 	//----------------------Simulation Parameters------------------------
 	
 	//Simulation time step
-	float step <- 2 #sec; 
+	float step <- 5 #sec; 
 	
 	//Simulation starting date
-	date starting_date <- date("2022-10-11 00:00:00"); 
+	date starting_date <- date("2022-10-11 07:00:00"); 
 	
 	//Date for log files
 	//date logDate <- #now;
-	date logDate <- date("2023-04-20 15:45:00");
+	date logDate <- date("2023-02-09 15:45:00");
 	
 	date nowDate <- #now;
 	
@@ -22,64 +22,81 @@ global {
 	int numberOfHours <- 24; //WARNING: If one day, we can also specify the number of hours, otherwise set 24h
 	
 	//----------------------Logging Parameters------------------------
-	bool loggingEnabled <- true parameter: "Logging" category: "Logs";
+	bool loggingEnabled <- false parameter: "Logging" category: "Logs";
 	bool printsEnabled <- false parameter: "Printing" category: "Logs";
 	
-	bool autonomousBikeEventLog <- false parameter: "Autonomous Bike Event/Trip Log" category: "Logs";
-	bool carEventLog <- true parameter: "Car Event/Trip Log" category: "Logs";
+	bool autonomousBikeEventLog <-false parameter: "Autonomous Bike Event/Trip Log" category: "Logs";
+	bool carEventLog <-false parameter: "Car Event/Trip Log" category: "Logs";
 	
-	bool packageTripLog <- true parameter: "Package Trip Log" category: "Logs";
-	bool packageEventLog <- true parameter: "Package Event Log" category: "Logs";
+	bool packageTripLog <-false parameter: "Package Trip Log" category: "Logs";
+	bool packageEventLog <-false parameter: "Package Event Log" category: "Logs";
 		
 	bool stationChargeLogs <- false parameter: "Station Charge Log" category: "Logs";
-	bool gasstationFuelLogs <- true parameter: "Gas Station Charge Log" category: "Logs";
+	bool gasstationFuelLogs <- false parameter: "Gas Station Charge Log" category: "Logs";
 	
-	bool roadsTraveledLog <- true parameter: "Roads Traveled Log" category: "Logs";
+	bool roadsTraveledLog <- false parameter: "Roads Traveled Log" category: "Logs";
 	
 	//----------------------------------Scenarios-----------------------------
 	bool traditionalScenario <- true parameter: "Traditional Scenario" category: "Scenarios";
-	int numVehiclesPackageTraditional <- 100 min:1 max:1000 parameter: "Number or Vehicles for Package Delivery in Traditional Scenario" category:"Initial";
+	int numVehiclesPackageTraditional <- 35 ;
+	bool timetoreload <- false;
 	
 	//----------------------Autonomous Scenario-------------------------
 	//-----------------Autonomous Bike Parameters-----------------------
-	int numAutonomousBikes <- 200				min: 0 max: 500 parameter: "Num Autonomous Bikes:" category: "Bike";
-	float maxBatteryLifeAutonomousBike <- 50000.0 #m	min: 10000#m max: 70000#m parameter: "Autonomous Bike Battery Capacity (m):" category: "Bike"; //battery capacity in m
-	float PickUpSpeedAutonomousBike <-  8/3.6 #m/#s min: 1/3.6 #m/#s max: 15/3.6 #m/#s parameter: "Autonomous Bike Pick-up Speed (m/s):" category:  "Bike";
-	float RidingSpeedAutonomousBike <-  PickUpSpeedAutonomousBike min: 1/3.6 #m/#s max: 15/3.6 #m/#s parameter: "Autonomous Bike Riding Speed (m/s):" category:  "Bike";
+	int numAutonomousBikes <- 60 min: 50 max: 300 parameter: "Number of Autonomous Bicycles:" category: "Autonomous Bicycle";
+	float PickUpSpeedAutonomousBike <-  6/3.6 #m/#s min: 5/3.6 #m/#s max: 20/3.6 #m/#s parameter: "Bike Speed (m/s):" category:  "Autonomous Bicycle";
+	float RidingSpeedAutonomousBike <-  PickUpSpeedAutonomousBike;
+	float maxBatteryLifeAutonomousBike <- 35000.0 #m	min: 35000#m max: 65000#m step: 30000 parameter: "Battery Capacity (m):" category: "Autonomous Bicycle"; //battery capacity in m
+	
 	float minSafeBatteryAutonomousBike <- 0.25*maxBatteryLifeAutonomousBike #m; //Amount of battery at which we seek battery and that is always reserved when charging another bike
 	float nightSafeBatteryAutonomousBike <- 0.9*maxBatteryLifeAutonomousBike #m; 
 	
 	//------------------------------------Charging Station Parameters--------------------------------------
-	int numChargingStations <- 75 	min: 1 max: 100 parameter: "Num Charging Stations:" category: "Initial";
+	int numChargingStations <- 75; // 	min: 1 max: 100 parameter: "Num Charging Stations:" category: "Autonomous Bicycle";
 	//float V2IChargingRate <- maxBatteryLife/(4.5*60*60) #m/#s; //4.5 h of charge
 	float V2IChargingRate <- maxBatteryLifeAutonomousBike/(4.5*60*60) #m/#s;  // 111 s battery swapping -> average of the two reported by Fei-Hui Huang 2019 Understanding user acceptancd of battery swapping service of sustainable transport
+	string rechargeRate <- "4.5hours" parameter: "Full Recharge" category: "Autonomous Bicycle" among: ["4.5hours", "111s"];
+	bool nightRechargeCond <- false;// parameter: "Night Recharge Condition" category: "Autonomous Bicycle";
+	bool rechargeCond <- false;// parameter: "Battery Condition" category: "Autonomous Bicycle";
 	
+	string chargeSpeed <- "Slow" among: ["Slow", "Fast"];
+	string batterySize <- "Small" among: ["Small", "Large"];
 	//----------------------Traditional Scenario-------------------------
 	//------------------------Car Parameters------------------------------
-	// 500km for Combustion Cars from: https://www.blog.ontariocars.ca/vehicles-with-long-range-on-one-tank-on-fuel/
-	float maxFuelCar <- 500000.0 #m	min: 320000.0#m max: 645000.0#m parameter: "Car Battery Capacity (m):" category: "Car";
+	// Data extracted from: https://www.thecoldwire.com/how-many-miles-does-a-full-tank-of-gas-last/
+	int numCars <- 40 parameter: "Number of Cars:" category: "Car";
+	//bool isCombustionCar <- true parameter: "Combustion Car" category: "Car";
+    string carType <- "Combustion" parameter: "Car Type" category: "Car" among: ["Combustion", "Electric"];
 	// Data extracted from: https://movotiv.com/statistics
-	float RidingSpeedCar<-  30/3.6 #m/#s min: 1/3.6 #m/#s max: 50/3.6 #m/#s parameter: "Car Riding Speed (m/s):" category:  "Car";
+	float RidingSpeedCar<-  30/3.6 #m/#s parameter: "Car Speed (m/s):" category:  "Car";
+	//float maxFuelCar <- 342000.0 #m	min: 320000.0#m max: 645000.0#m parameter: "Car Battery Capacity (m):" category: "Car";
+	float maxFuelCar <- 500000.0 #m	min:300000.0 max: 900000.0;
 	// Data extracted from: https://www.autoinsuresavings.org/far-drive-vehicle-empty/
-	float minSafeFuelCar <- 0.15*maxFuelCar #m; 
+	float minSafeFuelCar <- 1*maxFuelCar/16 #m; 
 	float nightSafeFuelCar <- 0.9*maxFuelCar #m; 
 	// Data extracted from: Good to Go - Assessing the Environmental Performance of New Mobility || Can Autonomy Make Bicycle-Sharing Systems More Sustainable - Environmental Impact Analysis of an Emerging Mobility Technology
-	// Refueling/recharging rate
-	// 3 minutes for Combustion Cars: https://www.researchgate.net/publication/311210193_Fuel_cells_vs_Batteries_in_the_Automotive_Sector
-	float refillingRate <- maxFuelCar/(3*60) #m/#s;  
-    
+	float refillingRate <- maxFuelCar/(3*60) #m/#s;  // average time to fill a tank is 2 minutes: https://www.api.org/oil-and-natural-gas/consumer-information/consumer-resources/staying-safe-pump#:~:text=It%20may%20be%20a%20temptation,be%20discharged%20at%20the%20nozzle.
+        
     //--------------------------Package Parameters----------------------------
-    float maxWaitTimePackage <- 1440 #mn		min: 3#mn max: 1440#mn parameter: "Max Wait Time Package:" category: "Package";
+    float maxWaitTimePackage <- 40 #mn parameter: "Maximum Wait Time Package (s):" category: "Package";
 	float maxDistancePackage_AutonomousBike <- maxWaitTimePackage*PickUpSpeedAutonomousBike #m;
 	float maxDistancePackage_Car <- maxWaitTimePackage*RidingSpeedCar#m;
-     
+    
+    //--------------------------CO2 graph-------------
+	rgb diagram_color;
+	float top_value;
+	rgb foodwastecolor;
+	
+	int x_min_value <- 0;
+	int x_max_value <- 18720;
+	
     //--------------------------Demand Parameters-----------------------------
     string cityDemandFolder <- "./../includes/Demand";
-    csv_file pdemand_csv <- csv_file (cityDemandFolder+ "/fooddeliverytrips_cambridge.csv",true);
-    
+    csv_file pdemand_csv <- csv_file (cityDemandFolder+ "/fooddeliverytrips_tangibletable.csv",true);
+  
     //----------------------Map Parameters------------------------
 	//Case - Cambridge
-	string cityScopeCity <- "Cambridge";
+	string cityScopeCity <- "Tangible_Table";
 	string residence <- "R";
 	string office <- "O";
 	string park <- "P";
@@ -88,8 +105,9 @@ global {
 	string usage <- "usage";
 	
 	map<string, rgb> color_map <- [residence::#papayawhip-10, office::#gray, park::#lightgreen, education::#lightblue, "Other"::#black];
-    map<string, rgb> color_map_2 <-  [residence::#dimgray, office::#darkcyan, park::#darkolivegreen+15, education::#steelblue-50, "Other"::#black];
-    
+    //map<string, rgb> color_map_2 <-  [residence::#lightslategray, office::#aqua, park::#limegreen, education::#steelblue, "Other"::#black];
+    map<string, rgb> color_map_2 <-  [residence::#lightgray, office::#lightgray, park::#lightgray, education::#lightgray, "Other"::#lightgray];
+
 	//GIS FILES To Upload - Cambridge
 	string cityGISFolder <- "./../includes/City/"+cityScopeCity;
 	file bound_shapefile <- file(cityGISFolder + "/Bounds.shp")			parameter: "Bounds Shapefile:" category: "GIS";
@@ -97,13 +115,13 @@ global {
 	file roads_shapefile <- file(cityGISFolder + "/Roads.shp")			parameter: "Road Shapefile:" category: "GIS";
 	
 	//Charging Stations - Cambridge
-	csv_file chargingStations_csv <- csv_file(cityGISFolder+ "/bluebikes_stations_cambridge.csv",true);
+	csv_file chargingStations_csv <- csv_file(cityGISFolder+ "/bluebikes_stations_tangibletable.csv",true);
 	
 	//Restaurants - Cambridge
-	csv_file restaurants_csv <- csv_file (cityGISFolder+ "/restaurants_cambridge.csv",true);
+	csv_file restaurants_csv <- csv_file (cityGISFolder+ "/restaurants_tangibletable.csv",true);
 	
 	//Gas Stations - Cambridge
-	csv_file gasstations_csv <- csv_file (cityGISFolder+ "/gasstations.csv",true);
+	csv_file gasstations_csv <- csv_file (cityGISFolder+ "/gasstations_tangibletable.csv",true);
 	 
 	//Image File
 	file imageRaster <- file('./../images/gama_black.png');

@@ -1,3 +1,0 @@
-Cycle,Time,Traditional Scenario,Num Autonomous Bikes,Autonomous Bikes Battery Life,AB PickUp Speed,Num Cars,Agent,Station,Start Time,End Time,Duration (min),Start Battery %,End Battery %,Battery Gain %
-41591,23:06:22,false,320,65000.0,3.888888888888889,0,autonomousBike155,chargingStation[44],19:41:16,23:06:22,205.1,24.03916439144174,100.0,75.96083560855827
-42010,23:20:20,false,320,65000.0,3.888888888888889,0,autonomousBike229,chargingStation[35],19:52:32,23:20:20,207.8,23.046005264659,100.0,76.953994735341
